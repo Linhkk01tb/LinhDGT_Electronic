@@ -1,0 +1,43 @@
+@import url(./layouts/header.css);
+@import url(./layouts/menu.css);
+@import url(./layouts/body.css);
+@import url(./layouts/footer.css);
+
+@import url(./components/table.css);
+body{
+    margin: 0;
+    font-size: 14px;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-color: aqua;
+    display: flex;
+    flex-wrap: wrap;
+    white-space:nowrap;
+}
+
+.header{
+    width: 100%;
+    height: 60px;
+    background-color: blue;
+}
+
+.menu{
+    width: 200px;
+    height: calc(100% - 60px - 80px);
+    background-color: red;
+}
+
+.body{
+    width: calc(100% - 200px);
+    height: calc(100% - 60px - 80px);
+    background-color: white;
+}
+
+.footer{
+    width: 100%;
+    height: 80px;
+    background-color: blueviolet;
+}

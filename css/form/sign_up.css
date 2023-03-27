@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.page-form {
+  width: 100%;
+  height: 100%;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.page-form-header {
+  width: 100%;
+  height: 60px;
+  background-color: chartreuse;
+}
+.page-form-content{
+    flex: 1;
+    background-color: black;
+    display: flex;
+}
+.page-form-left {
+  width: 50%;
+  height: 100%;
+  background-color: brown;
+}
+.page-form-right {
+  flex: 1;
+  background-color: blue;
+}
+.format-form{
+    width: calc(100% - 120px);
+    height: calc(100% - 40px);
+    margin: 20px 60px;
+    padding: 40px 80px;
+    box-sizing: border-box;
+    background-color: cornflowerblue;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+.format-form .item{
+    width: 100%;
+    height: 40px;
+    background-color: burlywood;
+}

@@ -1,0 +1,105 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+/* BODY TITLE */
+.body-title{
+    height: 40px;
+    width: 100%;
+    background-color: aqua;
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 10px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+
+/* BODY CONTENT */
+.body-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: flex-start;
+    overflow:auto;
+    column-gap: 20px;
+    row-gap: 20px;
+    padding: 20px 0;
+    box-sizing: border-box;
+
+}
+.body-content .item{
+    white-space:nowrap;
+    height: 200px;
+    width: 180px;
+    background-color: white;
+    box-sizing: border-box;
+    border: unset;
+    display: flex;
+    flex-direction: column;
+
+}
+.body-content .item .item-img{
+    background-color: red;
+    height: 70%;
+    width: 100%;
+}
+.body-content .item .item-name{
+    flex: 1;
+    text-align: center;
+    font-weight: 700;
+}
+.body-content .item .item-cost{
+    flex: 1;
+    text-align: center;
+    color:chocolate;
+}
+.body-content .item .item-control{
+    flex: 1;
+    display: flex;
+}
+.body-content .item .item-control .item-detail{
+    flex: 1;
+    background-color: brown;
+    background-image: url(../../assets/icon/magnifying-glass-solid.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 16px;
+    cursor: pointer;
+}
+.body-content .item .item-control .item-detail:hover{
+    background-color: aqua;
+}
+.body-content .item .item-control .item-detail:active{
+    background-color: red;
+}
+.body-content .item .item-control .item-shopping-add{
+    flex: 1;
+    background-color: coral;
+}
+
+/* BODY FOOTER */
+.body-footer{
+    height: 40px;
+    width: 100%;
+    background-color:darkorange;
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* BODY CONTENT ADMIN */
+
+.body-content-admin{
+
+    width: 100%;
+    overflow:auto;
+    padding:0 20px;
+    box-sizing: border-box;
+    height: calc(100% - 80px);
+}

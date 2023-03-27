@@ -1,0 +1,43 @@
+.menu{
+    display: flex;
+    flex-direction: column;
+    padding: 0 8px;
+    box-sizing: border-box;
+    overflow: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.menu .item{
+    height: 36px;
+    width: 100%;
+    background-color: unset;
+    display: flex;
+    box-sizing: border-box;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.menu .item + .item{
+    margin-top: 4px;
+}
+
+.menu .item .item-icon{
+    height: 100%;
+    width: 36px;
+    background-color: blueviolet;
+}
+
+.menu .item .item-name{
+    height: 100%;
+    width: calc(100% - 36px - 36px);
+    background-color: burlywood;
+}
+.menu .item .item-control{
+    height: 100%;
+    width: 36px;
+    background-color: yellowgreen;
+}
+
+.menu .item:hover{
+    background-color: rgb(18, 5, 206);
+}

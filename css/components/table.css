@@ -1,0 +1,25 @@
+.table-content{
+    width: 100%;
+}
+.table-body{
+    width: 100%;
+    border-collapse: collapse;
+}
+table tr{
+    height: 40px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+table tbody tr:hover{
+    background-color: aqua;
+}
+table tr th,td{
+    box-sizing: border-box;
+    height: 40px;
+}
+table thead tr{
+    position: sticky;
+    top: 0;
+    background-color: red;
+    
+}
