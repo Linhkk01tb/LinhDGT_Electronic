@@ -1,2 +1,2 @@
 # LinhDGT_Electronic
-Web bán đồ điện tử ASP.NET MVC
+Website bán đồ điện tử sử dụng ASP.NET MVC
