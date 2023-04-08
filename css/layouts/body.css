@@ -39,14 +39,14 @@
     width: 180px;
     background-color: white;
     box-sizing: border-box;
-    border: unset;
+    border: 1px solid black;
     display: flex;
     flex-direction: column;
 
 }
 .body-content .item .item-img{
     background-color: red;
-    height: 70%;
+    height: 65%;
     width: 100%;
 }
 .body-content .item .item-name{
@@ -65,22 +65,39 @@
 }
 .body-content .item .item-control .item-detail{
     flex: 1;
-    background-color: brown;
-    background-image: url(../../assets/icon/magnifying-glass-solid.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 16px 16px;
+    background-color: #3e6ee9;
     cursor: pointer;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 .body-content .item .item-control .item-detail:hover{
     background-color: aqua;
+    color: black;
 }
 .body-content .item .item-control .item-detail:active{
     background-color: red;
+    color: black;
 }
 .body-content .item .item-control .item-shopping-add{
     flex: 1;
-    background-color: coral;
+    background-color: #35119a;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.body-content .item .item-control .item-shopping-add:hover{
+    background-color: aqua;
+    color: black;
+}
+.body-content .item .item-control .item-shopping-add:active{
+    background-color: red;
+    color: black;
 }
 
 /* BODY FOOTER */
@@ -96,10 +113,29 @@
 /* BODY CONTENT ADMIN */
 
 .body-content-admin{
-
     width: 100%;
     overflow:auto;
-    padding:0 20px;
     box-sizing: border-box;
     height: calc(100% - 80px);
+    
+}
+.body-title-admin{
+    height: 40px;
+    width: 100%;
+    background-color: aqua;
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    display: flex;
+    font-weight: 700;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+}
+.body-title-admin .title{
+    background-color: green;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
 }
