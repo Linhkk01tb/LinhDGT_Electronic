@@ -4,6 +4,7 @@
 .table-body{
     width: 100%;
     border-collapse: collapse;
+    box-sizing: border-box;
 }
 table tr{
     height: 40px;
@@ -21,6 +22,6 @@ table tr th,td{
 table thead tr{
     position: sticky;
     top: 0;
-    background-color: red;
+    background-color: #c9c9c9;
     
 }

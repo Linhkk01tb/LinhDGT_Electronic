@@ -33,3 +33,6 @@
 .input-search:focus{
     border: 1px solid blue ;
 }
+.input-pop-up{
+    width: 400px;
+}

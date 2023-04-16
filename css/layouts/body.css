@@ -113,16 +113,15 @@
 /* BODY CONTENT ADMIN */
 
 .body-content-admin{
-    width: 100%;
-    overflow:auto;
+    min-width: 100%;
     box-sizing: border-box;
     height: calc(100% - 80px);
-    
+    overflow: auto;
 }
 .body-title-admin{
     height: 40px;
     width: 100%;
-    background-color: aqua;
+    background-color: #f1f4ff;
     flex-grow: 0;
     flex-shrink: 0;
     box-sizing: border-box;
@@ -131,9 +130,9 @@
     font-size: 18px;
     align-items: center;
     justify-content: center;
+    column-gap: 16px;
 }
 .body-title-admin .title{
-    background-color: green;
     height: 100%;
     width: 100%;
     box-sizing: border-box;

@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Đăng ký";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Đăng ký</title>
+</head>
+
+<body>
+    <div class="page-form">
+        <div class="page-form-header">
+            <div class="header-logo">
+
+            </div>
+        </div>
+        <div class="page-form-content">
+            <div class="page-form-left">
+                <img src="~/Content/assets/images/DL.png" alt="LinhDGT" style="width:100%" srcset="">
+            </div>
+            <div class="page-form-right">
+                <div class="format-form">
+                    <div class="item">
+                        <label class="item-label">Tài khoản</label>
+                        <input type="text" class="input" placeholder="Nhập tên tài khoản...">
+                    </div>
+                    <div class="item">
+                        <label class="item-label">Email</label>
+                        <input type="text" class="input" placeholder="Nhập email...">
+                    </div>
+                    <div class="item">
+                        <label class="item-label">Số điện thoại</label>
+                        <input type="text" class="input" placeholder="Nhập số điện thoại...">
+                    </div>
+                    <div class="item">
+                        <label class="item-label">Mật khẩu</label>
+                        <input type="text" class="input" placeholder="Nhập mật khẩu...">
+                    </div>
+                    <div class="item">
+                        <label class="item-label">Xác nhận mật khẩu</label>
+                        <input type="text" class="input" placeholder="Nhập lại mật khẩu...">
+                    </div>
+                    <div class="item">
+                        <button type="submit">submit</button>
+                    </div>
+                    <hr style="width: 100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+

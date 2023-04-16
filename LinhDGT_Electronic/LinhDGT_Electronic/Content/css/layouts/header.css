@@ -1,0 +1,43 @@
+/* HEADER */
+.header {
+  display: flex;
+}
+/* HEADER LEFT */
+.header-left {
+  width: 200px;
+  height: 100%;
+  background-color: brown;
+}
+/* HEADER RIGHT */
+.header-right {
+  width: calc(100% - 200px);
+  height: 100%;
+  background-color: #f1f4ff;
+  display: flex;
+  align-items: center;
+}
+
+.page-title {
+  width: 250px;
+  font-size: 22px;
+  text-align: center;
+  box-sizing: border-box;
+  font-weight: 700;
+}
+.page-search {
+  min-width: 400px;
+  position: relative;
+}
+.page-header-button {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 16px;
+  padding-right: 30px;
+}
+.page-title-admin {
+  text-align: center;
+  width: 100%;
+  font-weight: 700;
+  font-size: 30px;
+}
