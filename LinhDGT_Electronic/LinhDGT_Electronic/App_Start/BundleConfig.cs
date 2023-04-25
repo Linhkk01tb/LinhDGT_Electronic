@@ -21,9 +21,14 @@ namespace LinhDGT_Electronic
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Content/js/show-hide.js"));
+                      "~/Content/js/show-hide.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css"
+                      ));
+            bundles.Add(new StyleBundle("~/Content/css-handmake").Include(
                       "~/Content/css/container.css",
                       "~/Content/css/layouts/header.css",
                       "~/Content/css/layouts/menu.css",
@@ -36,7 +41,10 @@ namespace LinhDGT_Electronic
                       "~/Content/css/components/text-area.css",
                       "~/Content/css/form/pop_up.css",
                       "~/Content/css/form/sign_up.css",
-                      "~/Content/assets/font/fontawesome-free-6.3.0-web/css/all.min.css"
+                      "~/Content/css/components/tooltip.css",
+                      "~/Content/css/components/formmode.css",
+                      "~/Content/assets/font/fontawesome-free-6.3.0-web/css/all.min.css",
+                      "~/Content/PagedList.css"
                       ));
         }
     }

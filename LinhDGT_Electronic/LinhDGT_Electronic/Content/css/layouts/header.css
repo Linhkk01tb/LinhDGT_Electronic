@@ -41,3 +41,56 @@
   font-weight: 700;
   font-size: 30px;
 }
+.user-control {
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+    .user-control .user-control-arrow {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        top: 120%;
+        left: 40%;
+        transform: rotate(45deg);
+        background-color: #C9C9C9;
+        z-index: 10;
+        border-top: 1px solid #000;
+        border-left: 1px solid #000;
+        display: none;
+    }
+
+    .user-control .user-control-item {
+        position: absolute;
+        background-color: #C9C9C9;
+        box-sizing: border-box;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        right: -8px;
+        top: 142%;
+        border: 1px solid #000;
+        display: none;
+        cursor: pointer;
+    }
+
+        .user-control .user-control-item div {
+            height: 30px;
+            min-width: 200px;
+            text-decoration: none;
+            box-sizing: border-box;
+            display: flex;
+            justify-self: center;
+            align-items: center;
+            padding-left: 16px;
+            color: #000;
+            border-bottom: 1px solid #000;
+            
+        }
+            .user-control .user-control-item div:hover {
+                color: #fff;
+            }

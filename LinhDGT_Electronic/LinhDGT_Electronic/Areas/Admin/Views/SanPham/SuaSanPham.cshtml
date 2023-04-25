@@ -1,0 +1,125 @@
+﻿
+@model LinhDGT_Electronic.Models.EF.SanPham
+@{
+    ViewBag.Title = "Sửa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Sửa sản phẩm</div>
+    </div>
+    <div class="body-content-admin" style="padding: 16px">
+        @using (Html.BeginForm("SuaSanPham", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(x => x.SanPhamID)
+            <div class="form-mode">
+                <div class="item">
+                    <label for="">Mã sản phẩm</label>
+                    @Html.TextBoxFor(x => x.SanPhamCode, new { @class = "input", @placeholder = "Nhập mã sản phẩm...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.SanPhamCode, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Tên sản phẩm</label>
+                    @Html.TextBoxFor(x => x.SanPhamName, new { @class = "input", @placeholder = "Nhập tên sản phẩm...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.SanPhamName, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="" style="width:100%">Ảnh đại diện</label>
+                    @*<div style="width:100%;height:100%;position:relative;display:flex;flex-wrap:wrap">
+                        @Html.TextBoxFor(x => x.SanPhamImage, new { @id = "InputImage", @class = "input", @autocomplete = "off", @placeholder = "Chọn ảnh..." })
+                        <input type="button" value="Tải ảnh" style="position:absolute; right:0;height:30px;cursor:pointer" onclick="BrowerServer('InputImage');" />
+                        @Html.ValidationMessageFor(x => x.SanPhamImage, null, new { @style = "color:red" })
+                    </div>*@
+                    <img src="~/Content/assets/images/@Model.SanPhamImage" class="img-rounded" width="180" height="200" id="output" />
+                    <label for="upfile" style="cursor:pointer">
+                        Chọn ảnh
+                    </label>
+                    <input type="file" name="SanPhamImage" id="upfile" onchange="uploadFile(event)" style="display:none" />
+                    @Html.ValidationMessageFor(x => x.SanPhamImage, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Năm sản xuất</label>
+                    @Html.TextBoxFor(x => x.SanPhamProducedYear, new { @class = "input", @placeholder = "Nhập năm sản xuất...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.SanPhamProducedYear, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    @Html.LabelFor(model => model.DanhMucID, "Danh mục", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("DanhMucID", null, htmlAttributes: new { @class = "input" })
+                    @Html.ValidationMessageFor(model => model.DanhMucID, "", new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Thương hiệu</label>
+                    @Html.DropDownList("ThuongHieuID", null, htmlAttributes: new { @class = "input" })
+                    @Html.ValidationMessageFor(model => model.ThuongHieuID, "", new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Số lượng</label>
+                    @Html.TextBoxFor(x => x.SanPhamQuantity, new { @class = "input", @placeholder = "Nhập số lượng...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.SanPhamQuantity, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Đơn giá</label>
+                    @Html.TextBoxFor(x => x.SanPhamUnitPrice, new { @class = "input", @placeholder = "Nhập đơn giá...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.SanPhamUnitPrice, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Trạng thái</label>
+                    @{
+
+                        var a = "Kích hoạt";
+                        var b = "Vô hiệu";
+                        var c = "";
+                        if (Model.SanPhamStatus == 1)
+                        {
+                            c = a;
+                        }
+                        else
+                        {
+                            c = b;
+                        }
+                        IEnumerable<string> status = new List<string> { a, b };
+
+                    }
+                    @Html.DropDownList("status", new SelectList(status, status.FirstOrDefault()), new { @class = "input" })
+                </div>
+                <div class="item">
+                    <label for="" style="width:100%">Mô tả</label>
+                    @Html.TextAreaFor(x => x.SanPhamDescription, new { @class = "text-area", @placeholder = "Nhập mô tả...", @id = "text-area-description" })
+                    @Html.ValidationMessageFor(x => x.SanPhamDescription, null, new { @class = "text-danger" })
+                </div>
+                <div class="item" style="justify-content: end; column-gap: 16px;">
+                    <a href="/admin/SanPham/index" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Quay lại</a>
+                    <button class="button-pop-up-footer" type="submit">Xác nhận</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="body-footer">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace('text-area-description', {
+            customConfig: '/content/ckeditor/config.js',
+            extraAllowedContent: 'span',
+        });
+    });
+    function BrowerServer(field) {
+        var finder = new CKFinder();
+        finder.selectActionFunction = function (fileUrl) {
+            document.getElementById(field).value = fileUrl;
+        };
+        finder.popup();
+    }
+</script>
+<script>
+    var uploadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
+@Scripts.Render("~/bundles/jqueryval")

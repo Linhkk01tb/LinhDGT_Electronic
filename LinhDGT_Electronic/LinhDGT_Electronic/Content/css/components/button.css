@@ -41,12 +41,8 @@
         background-color: #f2c981;
     }
 
-.button-admin-control-create {
-    cursor: pointer;
-}
-
 .button-pop-up-footer {
-    width: 100px;
+    min-width: 100px;
     height: 36px;
     cursor: pointer;
     border-radius: 4px;
@@ -93,12 +89,63 @@
 .button-admin-control-create {
     height: 36px;
     min-width: 100px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 1px solid #2c82df;
+    background-color: #2c82df;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:100;
 }
-
+a {
+    text-decoration: none;
+    text-decoration-color: #000;
+}
 .button-admin-control-delete {
     min-width: 36px;
     height: 36px;
     margin-right: 8px;
     box-sizing: border-box;
     cursor: pointer;
+    background-color: red;
+    color: white;
+    border: unset;
+    outline: unset;
+    border-radius: 8px;
+}
+
+.button-sign-in-up {
+    width:80%;
+    height: 36px;
+    border-radius: 40px;
+    background-color:blue;
+    color:white;
+    cursor:pointer;
+    border:unset;
+}
+    .button-sign-in-up:hover {
+        background-color: mediumaquamarine;
+        color:#000;
+    }
+    .button-sign-in-up:active {
+        background-color: aqua;
+        color: #000;
+    }
+.button-admin-control-edit {
+    height: 36px;
+    width: 36px;
+    cursor: pointer;
+    border: 1px solid #2c82df;
+    background-color: #2c82df;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 100;
 }

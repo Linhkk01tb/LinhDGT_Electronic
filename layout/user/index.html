@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-handmake">
         <div class="header">
             <div class="header-left">
                 <div class="header-logo">
@@ -25,10 +25,24 @@
                             width="24"></button>
                 </div>
                 <div class="page-header-button">
-                    <button class="header-button notice" id="notice"><i class="fa-solid fa-bell"></i></button>
-                    <button class="header-button category"><i class="fa-solid fa-cart-shopping"></i></button>
-                    <button class="header-button help"><i class="fa-solid fa-circle-info"></i></button>
-                    <button class="header-button user"><i class="fa-solid fa-user"></i></button>
+                    <div class="user-control">
+                        <button class="header-button notice" id="notice"><i class="fa-solid fa-bell"></i></button>
+                    </div>
+                    <div class="user-control">
+                        <button class="header-button category"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="user-control">
+                        <button class="header-button help"><i class="fa-solid fa-circle-info"></i></button>
+                    </div>
+                    <div class="user-control">
+                        <button class="header-button user"><i class="fa-solid fa-user"></i></button>
+                        <div class="user-control-arrow"></div>
+                        <div class="user-control-item">
+                            <a href="../user/dangnhap.html">Đăng nhập</a>
+                            <a href="../user/dangky.html">Đăng ký</a>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,8 +88,12 @@
                     <div class="item-name">Laptop acer chất lượng</div>
                     <div class="item-cost">$2000000</div>
                     <div class="item-control">
-                        <a href="" class="item-detail"><i class="fa-solid fa-eye"></i></a>
-                        <a href="" class="item-shopping-add"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <a href="" class="item-detail tooltip"><i class="fa-solid fa-eye"></i>
+                        <span class="tooltiptext">Xem chi tiết</span>
+                        </a>
+                        <a href="" class="item-shopping-add tooltip"><i class="fa-solid fa-cart-shopping"></i>
+                            <span class="tooltiptext">Thêm vào giỏ hàng</span>
+                        </a>
                     </div>
                 </div>
                 <div class="item">

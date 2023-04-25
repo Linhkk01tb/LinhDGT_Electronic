@@ -1,0 +1,23 @@
+﻿.form-mode {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 24px;
+    column-gap: 24px;
+}
+
+    .form-mode .item {
+        width: 100%;
+        row-gap: 8px;
+        display: flex;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        padding: 0 16px;
+    }
+
+        .form-mode .item label.input {
+            width: 100%;
+        }
+.text-danger{
+    color:red;
+}

@@ -1,0 +1,69 @@
+﻿@model LinhDGT_Electronic.Models.EF.ThuongHieu
+@{
+    ViewBag.Title = "Sửa thương hiệu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Sửa thương hiệu</div>
+    </div>
+    <div class="body-content-admin" style="padding: 16px">
+        @using (Html.BeginForm("SuaThuongHieu", "ThuongHieu", FormMethod.Post, new { }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(x => x.ThuongHieuID)
+            <div class="form-mode">
+                <div class="item">
+                    <label for="">Mã thương hiệu</label>
+                    @Html.TextBoxFor(x => x.ThuongHieuCode, new { @class = "input", @placeholder = "Nhập mã thương hiệu...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.ThuongHieuCode, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Tên thương hiệu</label>
+                    @Html.TextBoxFor(x => x.ThuongHieuName, new { @class = "input", @placeholder = "Nhập tên thương hiệu...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.ThuongHieuName, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Trạng thái</label>
+                    @{
+                        var a = "Kích hoạt";
+                        var b = "Vô hiệu";
+                        var c = "";
+                        if (Model.ThuongHieuStatus == 1)
+                        {
+                            c = a;
+                        }
+                        else
+                        {
+                            c = b;
+                        }
+                        IEnumerable<string> status = new List<string> { a,b };
+                    }
+                    @Html.DropDownList("status", new SelectList(status, c), new { @class = "input" })
+                </div>
+                <div class="item">
+                    <label for="" style="width:100%">Mô tả</label>
+                    @Html.TextAreaFor(x => x.ThuongHieuDescription, new { @class = "text-area", @placeholder = "Nhập mô tả...",@id = "text-area-description" })
+                    @Html.ValidationMessageFor(x => x.ThuongHieuDescription, null, new { @class = "text-danger" })
+                </div>
+                <div class="item" style="justify-content: end; column-gap: 16px;">
+                    <a href="/admin/ThuongHieu/index" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Quay lại</a>
+                    <button class="button-pop-up-footer" type="submit">Xác nhận</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="body-footer">
+
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+            CKEDITOR.replace('text-area-description', {
+                customConfig: '/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+</script>

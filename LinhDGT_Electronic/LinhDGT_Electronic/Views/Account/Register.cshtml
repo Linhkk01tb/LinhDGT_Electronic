@@ -1,0 +1,85 @@
+﻿@model LinhDGT_Electronic.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Đăng ký";
+}
+
+<div class="page-form">
+    <div class="page-form-header">
+        <div class="header-logo">
+            <img src="~/Content/assets/images/DLcut.png" width="200" />
+        </div>
+        <div class="header-title" style="background-color: #F1F4FF">LinhDGT Electronic Đăng ký</div>
+    </div>
+    <div class="page-form-content">
+        <div class="page-form-left">
+            <img src="~/Content/assets/images/DL.png" alt="LinhDGT" sizes="" srcset="" style="width:500px;padding-left:100px; border:1px solid black">
+        </div>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "page-form-right", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            
+    <div class="format-form">
+        <div class="item" style="background-color:unset;display:flex;justify-content:center;align-items:center">
+            <span style="font-weight:700;font-size: 20px">Đăng ký tài khoản</span>
+        </div>
+        <div class="item">
+            @Html.LabelFor(m => m.Email, new { @class = "item-label" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "input", @placeholder = "Nhập email..." })
+            @Html.ValidationMessageFor(m => m.Email,null, new { @style="color:red"})
+        </div>
+        <div class="item">
+            <label for="Password" class="item-label">Mật khẩu</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "input", @placeholder = "Nhập mật khẩu..." })
+        </div>
+        <div class="item">
+            <label for="ConfirmPassword" class="item-label">Xác nhận mật khẩu</label>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input", @placeholder = "Nhập lại mật khẩu..." })
+        </div>
+        <div class="item" style="background-color:unset;display:flex;justify-content:center;align-items:center">
+            <button type="submit" class="button-sign-in-up">Đăng ký</button>
+            <br/>
+            <hr style="width: 100%;">
+            <span>Đã có tài khoản? @Html.ActionLink("Đăng nhập ngay", "Login", "Account")</span>
+        </div>
+       
+    </div>
+
+        }
+    </div>
+</div>
+
+@*  @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
+    }*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

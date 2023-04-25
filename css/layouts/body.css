@@ -2,14 +2,19 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
 }
-
+.body-no-menu{
+    width: 100%;
+    height: calc(100% - 60px - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: none;
+}
 /* BODY TITLE */
 .body-title{
     height: 40px;
     width: 100%;
-    background-color: aqua;
     flex-grow: 0;
     flex-shrink: 0;
     box-sizing: border-box;
@@ -21,6 +26,7 @@
 
 
 /* BODY CONTENT */
+
 .body-content{
     display: flex;
     flex-wrap: wrap;
@@ -137,4 +143,104 @@
     width: 100%;
     box-sizing: border-box;
     padding: 10px 20px;
+}
+
+.history-control{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+.history-control .history-control-item{
+    width: 10%;
+    height: 100%;
+    background-color: #C9C9C9;
+    border-top-right-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+
+
+.history-control .history-control-item:hover{
+    background-color: aqua;
+}
+.history-control .history-control-item:focus{
+    background-color: #fff;
+}
+.history-control .history-control-item:n-of-type(1){
+    background-color: #fff;
+}
+
+
+
+.user-control{
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+}
+.user-control .user-control-arrow{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 120%;
+    left: 40%;
+    transform: rotate(45deg);
+    background-color: #C9C9C9;
+    z-index: 10;
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+    display: none;
+}
+.user-control .user-control-item{
+    position:absolute;
+    background-color: #C9C9C9;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    right: -8px;
+    top: 142%;
+    border: 1px solid #000;
+    display: none;
+}
+.user-control .user-control-item a{
+    height: 30px;
+    min-width: 200px;
+    text-decoration: none;
+    box-sizing: border-box;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    padding-left: 16px;
+    color: #000;
+}
+.user-control .user-control-item a:hover{
+    color: #fff;
+}
+
+.form-mode{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 24px;
+    column-gap: 24px;
+}
+.form-mode .item{
+    width: 100%;
+    row-gap: 8px;
+    display: flex;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    padding: 0 16px;
+}
+.form-mode .item label,input{
+    width: 100%;
 }

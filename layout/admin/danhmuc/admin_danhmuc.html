@@ -116,35 +116,31 @@
                 <button class="button-admin-control-create">Thêm mới</button>
             </div>
             <div class="body-content-admin">
-                <div class="table-content">
-                    <table class="table-body" border="1">
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox"></th>
-                                <th>STT</th>
-                                <th>Mã danh mục</th>
-                                <th>Tên danh mục</th>
-                                <th>Mô tả</th>
-                                <th>Trạng thái</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>1</td>
-                                <td>DM001</td>
-                                <td>Đồ điện gia dụng</td>
-                                <td>Hàng nhập khẩu</td>
-                                <td>Kích hoạt</td>
-                                <td><button class="button-admin-control-edit"><i class="fa-solid fa-pen"></i></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="form-mode">
+                    <div class="item" style="padding-top: 16px;">
+                        <label for="">Mã danh mục</label>
+                        <input type="text" class="input">
+                    </div>
+                    <div class="item">
+                        <label for="">Tên danh mục</label>
+                        <input type="text" class="input">
+                    </div>
+                    <div class="item">
+                        <label for="">Trạng thái</label>
+                        <input type="text" class="input">
+                    </div>
+                    <div class="item">
+                        <label for="">Mô tả</label>
+                        <textarea name="" id="" cols="30" rows="10" style="width: 100%;"></textarea>
+                    </div>
+                    <div class="item" style="justify-content: end; column-gap: 16px;">
+                        <button class="button">Huỷ</button>
+                        <button class="button">Xác nhận</button>
+                    </div>
                 </div>
             </div>
-            <div class="body-footer">
-
+            <div class="body-footer" style="display: flex; justify-content: end;">
+                <button class="button" >Quay lại</button>
             </div>
 
         </div>

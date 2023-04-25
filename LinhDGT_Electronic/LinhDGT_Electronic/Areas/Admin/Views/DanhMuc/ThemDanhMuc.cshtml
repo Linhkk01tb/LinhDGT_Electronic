@@ -1,0 +1,57 @@
+﻿@model LinhDGT_Electronic.Models.EF.DanhMuc
+@{
+    ViewBag.Title = "Thêm Danh Mục";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Thêm mới danh mục</div>
+    </div>
+    <div class="body-content-admin" style="padding: 16px">
+        @using (Html.BeginForm("ThemDanhMuc", "DanhMuc", FormMethod.Post, new { }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="form-mode">
+                <div class="item">
+                    <label for="">Mã danh mục</label>
+                    @Html.TextBoxFor(x => x.DanhMucCode, new { @class = "input", @placeholder = "Nhập mã danh mục...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.DanhMucCode, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Tên danh mục</label>
+                    @Html.TextBoxFor(x => x.DanhMucName, new { @class = "input", @placeholder = "Nhập tên danh mục...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.DanhMucName, null, new { @style = "color:red" })
+                </div>
+                <div class="item">
+                    <label for="">Trạng thái</label>
+                    @{
+                        IEnumerable<string> status = new List<string> { "Kích hoạt", "Vô hiệu" };
+                    }
+                    @Html.DropDownList("status", new SelectList(status, status.FirstOrDefault()), new { @class = "input" })
+                </div>
+                <div class="item">
+                    <label for="" style="width:100%">Mô tả</label>
+                    @Html.TextAreaFor(x => x.DanhMucDescription, new { @class = "text-area", @placeholder = "Nhập mô tả...", @id = "text-area-description" })
+                    @Html.ValidationMessageFor(x => x.DanhMucDescription, null, new { @class = "text-danger" })
+                </div>
+                <div class="item" style="justify-content: end; column-gap: 16px;">
+                    <a href="/admin/danhmuc/index" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Quay lại</a>
+                    <button class="button-pop-up-footer" type="submit">Xác nhận</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="body-footer">
+
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+            CKEDITOR.replace('text-area-description', {
+                customConfig: '/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+</script>

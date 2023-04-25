@@ -2,7 +2,7 @@
     width: 100%;
 }
 .table-body{
-    width: 100%;
+    min-width: 100%;
     border-collapse: collapse;
 }
 table tr{

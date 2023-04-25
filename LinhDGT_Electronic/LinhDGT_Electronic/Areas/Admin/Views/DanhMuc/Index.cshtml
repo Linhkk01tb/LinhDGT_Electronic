@@ -1,0 +1,102 @@
+﻿@model PagedList.PagedList<LinhDGT_Electronic.Models.EF.DanhMuc>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Quản lý danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Danh sách danh mục</div>
+        <div class="page-search">
+            <input type="text" placeholder="Nhập từ khoá để tìm kiếm..." class="input-search">
+            <button class="button-search">
+                <img src="~/Content/assets/icon/magnifying-glass-solid.svg" alt="search"
+                     width="24">
+            </button>
+        </div>
+        <a class="button-admin-control-create" href="/admin/danhmuc/themdanhmuc">Thêm mới</a>
+        <button class="button-admin-control-delete"><i class="fa-solid fa-trash"></i></button>
+    </div>
+    <div class="body-content-admin">
+        <div class="table-content">
+
+            <table class="table-body">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>STT</th>
+                        <th>Mã danh mục</th>
+                        <th>Tên danh mục</th>
+                        <th>Mô tả</th>
+                        <th>Trạng thái</th>
+                        <th colspan="2">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = 1;
+                        var status = "";
+
+                        foreach (var item in Model)
+                        {
+                            if (item.DanhMucStatus == 1)
+                            {
+                                status = "Kích hoạt";
+                            }
+                            else if (item.DanhMucStatus == 2)
+                            {
+                                status = "Vô hiệu";
+                            }
+                            <tr id="row_danhmuc_@item.DanhMucID">
+                                <td><input type="checkbox"></td>
+                                <td>@i</td>
+                                <td>@item.DanhMucCode</td>
+                                <td>@item.DanhMucName</td>
+                                <td>@item.DanhMucDescription</td>
+                                <td>@status</td>
+                                <td style="display:flex; justify-content:center;border:unset"><a class="button-admin-control-edit" href="/admin/danhmuc/suadanhmuc/@item.DanhMucID"><i class="fa-solid fa-pen"></i></a></td>
+                                <td style="display:flex; justify-content:center;border:unset"><a data-id="@item.DanhMucID" class="button-admin-control-edit button-delete-danhmuc-by-id" style="background-color:red;border-color:red"><i class="fa-solid fa-trash"></i></a></td>
+                            </tr>
+                            i++;
+                        }
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7">Không có bản ghi</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="body-footer">
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+        <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.button-delete-danhmuc-by-id', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Xoá bản ghi?');
+            if (conf === true) {
+                $.ajax({
+                    url: '/admin/danhmuc/xoadanhmuc',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            $('#row_danhmuc_' + id).remove();
+                            alert('Đã xoá!');
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
