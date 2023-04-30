@@ -5,7 +5,7 @@ namespace LinhDGT_Electronic.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email là trường bắt buộc!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -41,7 +41,7 @@ namespace LinhDGT_Electronic.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email là trường bắt buộc!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -58,20 +58,20 @@ namespace LinhDGT_Electronic.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Nhớ mật khẩu?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "Email là trường bắt buộc!")]
-        [EmailAddress(ErrorMessage ="Không đúng định dạng email!")]
+        [EmailAddress(ErrorMessage ="Email không đúng định dạng!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Mật khẩu là trường bắt buộc!")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "{0} phải gồm ít nhất {2} ký tự!", MinimumLength = 6)]
+        [DataType(DataType.Password,ErrorMessage ="Mật khẩu không đủ mạnh!")]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
@@ -89,7 +89,7 @@ namespace LinhDGT_Electronic.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} phải gồm ít nhất {2} ký tự!", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -104,8 +104,8 @@ namespace LinhDGT_Electronic.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage ="Email không được để rỗng!")]
+        [EmailAddress(ErrorMessage ="Email không đúng định dạng!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

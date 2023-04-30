@@ -1,0 +1,48 @@
+﻿@model PagedList.PagedList<LinhDGT_Electronic.Models.EF.SanPham>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ViewBag.name;
+}
+<div class="body">
+    <div class="body-title">
+        <a href="/home/index">Home</a>
+        <span>/ @ViewBag.name</span>
+
+    </div>
+    <div class="body-content">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+
+                <div class="item">
+                    <div class="item-img">
+                        <img src="~/Content/assets/images/@item.SanPhamImage" style="width: 100%; height: 100%;">
+                    </div>
+                    <div class="item-name">@item.SanPhamName</div>
+                    <div class="item-cost">@item.SanPhamUnitPrice.ToString("0,0 VNĐ")</div>
+                    <div class="item-control">
+                        <a href="/sanpham/chitietsanphamtheodanhmuc/@item.DanhMuc.DanhMucID/@item.SanPhamID" class="item-detail tooltip">
+                            <i class="fa-solid fa-eye"></i>
+                            <span class="tooltiptext">Xem chi tiết</span>
+                        </a>
+                        <a href="" class="item-shopping-add tooltip btnAddShoppingCart" data-id="@item.SanPhamID">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="tooltiptext">Thêm vào giỏ hàng</span>
+                        </a>
+                    </div>
+                </div>
+            }
+
+        }
+
+    </div>
+
+    <div class="body-footer">
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+        <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+    </div>
+
+</div>

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace LinhDGT_Electronic.Areas.Admin.Controllers
 {
@@ -15,9 +16,9 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
         // GET: Admin/SanPham
         private ApplicationDbContext _dbContext = new ApplicationDbContext();
         // GET: Admin/SanPham
-        public ActionResult Index(int ? page, string timkiem)
+        public ActionResult Index(int? page, string timkiem)
         {
-            IEnumerable<SanPham> items = _dbContext.SanPhams.OrderByDescending(x => x.DanhMucID);
+            IEnumerable<SanPham> items = _dbContext.SanPhams.OrderByDescending(x => x.SanPhamID);
             var pagesize = 10;
             if (page == null)
             {
@@ -25,7 +26,7 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(timkiem))
             {
-                items = items.Where(x => x.SanPhamCode.Contains(timkiem) || x.SanPhamName.Contains(timkiem));
+                items = items.Where(x => x.SanPhamName.Contains(timkiem));
             }
             var pagenumber = page.HasValue ? Convert.ToInt32(page) : 1;
             items = items.ToPagedList(pagenumber, pagesize);
@@ -42,21 +43,36 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult ThemSanPham(FormCollection f, SanPham model)
+        public ActionResult ThemSanPham(FormCollection frm, SanPham model, List<string> Images)
         {
 
             if (ModelState.IsValid)
             {
                 model.SanPhamImage = "";
-                var fileImg = Request.Files["SanPhamImage"];
-                if (fileImg != null && fileImg.ContentLength > 0)
+                var f = Request.Files["SanPhamImage"];
+                if (f != null && f.ContentLength > 0)
                 {
-                    string filename = System.IO.Path.GetFileName(fileImg.FileName);
+                    string filename = System.IO.Path.GetFileName(f.FileName);
                     string upath = Server.MapPath("~/Content/assets/images/" + filename);
-                    fileImg.SaveAs(upath);
+                    f.SaveAs(upath);
                     model.SanPhamImage = filename;
                 }
-                if (f["status"] == "Kích hoạt")
+                if (Images != null && Images.Count > 0)
+                {
+                    for (int i = 0; i < Images.Count; i++)
+                    {
+                        
+                           
+                            model.AnhSanPhams.Add(new AnhSanPham
+                            {
+                                SanPhamID = model.SanPhamID,
+                                AnhName = Images[i],
+                                AnhStatus = true,
+                            });
+    
+                    }
+                }
+                if (frm["status"] == "Kích hoạt")
                     model.SanPhamStatus = 1;
                 else
                     model.SanPhamStatus = 2;
@@ -70,7 +86,7 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult SuaSanPham(int id)
+        public ActionResult SuaSanPham(int? id)
         {
             ViewBag.DanhMucID = new SelectList(_dbContext.DanhMucs, "DanhMucID", "DanhMucName");
             ViewBag.ThuongHieuID = new SelectList(_dbContext.ThuongHieus, "ThuongHieuID", "ThuongHieuName");
@@ -81,25 +97,24 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult SuaSanPham(FormCollection f, SanPham model)
+        public ActionResult SuaSanPham(FormCollection frm, SanPham model)
         {
 
             if (ModelState.IsValid)
             {
                 model.SanPhamImage = "";
-                var fileImg = Request.Files["SanPhamImage"];
-                if (fileImg != null && fileImg.ContentLength > 0)
+                var f = Request.Files["SanPhamImage"];
+                if (f != null && f.ContentLength > 0)
                 {
-                    string filename = System.IO.Path.GetFileName(fileImg.FileName);
+                    string filename = System.IO.Path.GetFileName(f.FileName);
                     string upath = Server.MapPath("~/Content/assets/images/" + filename);
-                    fileImg.SaveAs(upath);
+                    f.SaveAs(upath);
                     model.SanPhamImage = filename;
                 }
-                if (f["status"] == "Kích hoạt")
+                if (frm["status"] == "Kích hoạt")
                     model.SanPhamStatus = 1;
                 else model.SanPhamStatus = 2;
                 _dbContext.SanPhams.Attach(model);
-                _dbContext.Entry(model).Property(x => x.SanPhamCode).IsModified = true;
                 _dbContext.Entry(model).Property(x => x.SanPhamName).IsModified = true;
                 _dbContext.Entry(model).Property(x => x.SanPhamImage).IsModified = true;
                 _dbContext.Entry(model).Property(x => x.SanPhamProducedYear).IsModified = true;
@@ -125,6 +140,26 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
             {
                 _dbContext.SanPhams.Remove(item);
                 _dbContext.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+
+        [HttpPost]
+        public ActionResult XoaTatCa(string ids)
+        {
+            if (!string.IsNullOrEmpty(ids))
+            {
+                var items = ids.Split(',');
+                if (items != null && items.Any())
+                {
+                    foreach (var item in items)
+                    {
+                        var obj = _dbContext.SanPhams.Find(Convert.ToInt32(item));
+                        _dbContext.SanPhams.Remove(obj);
+                        _dbContext.SaveChanges();
+                    }
+                }
                 return Json(new { success = true });
             }
             return Json(new { success = false });

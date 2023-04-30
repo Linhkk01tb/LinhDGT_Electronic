@@ -14,9 +14,8 @@ namespace LinhDGT_Electronic.Models.EF
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AnhID { get; set; }
-        public string AnhCode { get; set; }
         public string AnhName { get; set; }
-        public int AnhStatus { get; set; }
+        public bool AnhStatus { get; set; }
         public int SanPhamID { get; set; }
         public virtual SanPham SanPham { get; set; }
         

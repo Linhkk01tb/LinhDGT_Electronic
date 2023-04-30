@@ -3,3 +3,17 @@
     ViewBag.Title = "Trang quản lý";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
+<div class="body">
+    <div class="body-title-admin">
+        Tổng quan
+    </div>
+    <div class="body-content-admin">
+        <div class="home-item">Sản phẩm: @ViewBag.sanpham</div>
+        <div class="home-item">Danh mục: @ViewBag.danhmuc</div>
+        <div class="home-item">Thương hiệu: @ViewBag.thuonghieu</div>
+        <div class="home-item">Đơn hàng: @ViewBag.donhang</div>
+        <div class="home-item">Nhân viên: @ViewBag.nhanvien</div>
+        <div class="home-item">Khách hàng: @ViewBag.khachhang</div>
+    </div>
+</div>

@@ -58,7 +58,7 @@
         left: 40%;
         transform: rotate(45deg);
         background-color: #C9C9C9;
-        z-index: 10;
+        z-index: 5000;
         border-top: 1px solid #000;
         border-left: 1px solid #000;
         display: none;
@@ -76,6 +76,7 @@
         border: 1px solid #000;
         display: none;
         cursor: pointer;
+        z-index: 4000;
     }
 
         .user-control .user-control-item div {

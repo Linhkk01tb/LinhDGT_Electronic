@@ -37,16 +37,14 @@
                 Lịch sử mua hàng
             </div>
             <div class="body-content-admin">
-                <div class="history-control">
-                    <input type="button" class="history-control-item" value="Tất cả"/>
-                    <input type="button" class="history-control-item" value="Chờ thanh toán"/>
-                    <input type="button" class="history-control-item" value="Vận chuyển"/>
-                    <input type="button" class="history-control-item" value="Đang giao"/>
-                    <input type="button" class="history-control-item" value="Hoàn thành"/>
-                    <input type="button" class="history-control-item" value="Đã  huỷ"/>
-                    <input type="button" class="history-control-item" value="Trả hàng/Hoàn tiền"/>
+                <div class="history-control tab" style="border: unset;background-color: unset;">
+                    <button type="button" class="history-control-item tablinks" onclick="openFunc(event, 'tatca')" id="btn-tatca">Tất cả</button>
+                    <button type="button" class="history-control-item tablinks" onclick="openFunc(event, 'chothanhtoan')" id="btn-chothanhtoan">Chờ xử lý</button>
+                    <button type="button" class="history-control-item tablinks" onclick="openFunc(event, 'danggiao')" id="btn-danggiao">Đang giao</button>
+                    <button type="button" class="history-control-item tablinks" onclick="openFunc(event, 'hoanthanh')" id="btn-hoanthanh">Hoàn thành</button>
+                    <button type="button" class="history-control-item tablinks" onclick="openFunc(event, 'dahuy')" id="btn-dahuy">Đã huỷ</button>
                 </div>
-                <div class="table-content" style="padding:0 16px;box-sizing: border-box;">
+                <div class="table-content tabcontent" style="padding:0 16px;box-sizing: border-box;" id="tatca">
                     <table class="table-body">
                         <thead>
                             <tr>
@@ -73,10 +71,116 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="body-footer">
+                <div class="table-content tabcontent" style="padding:0 16px;box-sizing: border-box;" id="chothanhtoan">
+                    <table class="table-body">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;"><input type="checkbox"></th>
+                                <th style="width: 70px;">STT</th>
+                                <th>Mã đơn hàng</th>
+                                <th>Người nhận</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th colspan="2">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td>DH001</td>
+                                <td>Lê Quang Linh</td>
+                                <td>0869143513</td>
+                                <td>Minh Hoà - Hưng Hà - Thái Bình</td>
+                                <td><button class="button-admin-control-edit"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="button-admin-control-edit"><i class="fa-solid fa-trash"></i></button></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-content tabcontent" style="padding:0 16px;box-sizing: border-box;" id="danggiao">
+                    <table class="table-body">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;"><input type="checkbox"></th>
+                                <th style="width: 70px;">STT</th>
+                                <th>Mã đơn hàng</th>
+                                <th>Người nhận</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th colspan="2">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td>DH001</td>
+                                <td>Lê Quang Linh</td>
+                                <td>0869143513</td>
+                                <td>Minh Hoà - Hưng Hà - Thái Bình</td>
+                                <td><button class="button-admin-control-edit"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="button-admin-control-edit"><i class="fa-solid fa-trash"></i></button></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-content tabcontent" style="padding:0 16px;box-sizing: border-box;" id="hoanthanh">
+                    <table class="table-body">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;"><input type="checkbox"></th>
+                                <th style="width: 70px;">STT</th>
+                                <th>Mã đơn hàng</th>
+                                <th>Người nhận</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th colspan="2">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td>DH001</td>
+                                <td>Lê Quang Linh</td>
+                                <td>0869143513</td>
+                                <td>Minh Hoà - Hưng Hà - Thái Bình</td>
+                                <td><button class="button-admin-control-edit"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="button-admin-control-edit"><i class="fa-solid fa-trash"></i></button></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-content tabcontent" style="padding:0 16px;box-sizing: border-box;" id="dahuy">
+                    <table class="table-body">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;"><input type="checkbox"></th>
+                                <th style="width: 70px;">STT</th>
+                                <th>Mã đơn hàng</th>
+                                <th>Người nhận</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th colspan="2">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td>DH001</td>
+                                <td>Lê Quang Linh</td>
+                                <td>0869143513</td>
+                                <td>Minh Hoà - Hưng Hà - Thái Bình</td>
+                                <td><button class="button-admin-control-edit"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="button-admin-control-edit"><i class="fa-solid fa-trash"></i></button></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+             </div>
 
-            </div>
         </div>
         <div class="footer">
             COPYRIGHT BY LÊ QUANG LINH
@@ -92,3 +196,20 @@
 </body>
 
 </html>
+<script>
+    function openFunc(evt, content) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace("active", "");
+        }
+        document.getElementById(content).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    document.getElementById("btn-tatca").click();
+
+</script>

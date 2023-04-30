@@ -70,7 +70,6 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
                     model.ThuongHieuStatus = 1;
                 else model.ThuongHieuStatus = 2;
                 _dbContext.ThuongHieus.Attach(model);
-                _dbContext.Entry(model).Property(x => x.ThuongHieuCode).IsModified = true;
                 _dbContext.Entry(model).Property(x => x.ThuongHieuName).IsModified = true;
                 _dbContext.Entry(model).Property(x => x.ThuongHieuStatus).IsModified = true;
                 _dbContext.Entry(model).Property(x => x.ThuongHieuDescription).IsModified = true;

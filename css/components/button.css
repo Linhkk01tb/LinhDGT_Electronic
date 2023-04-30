@@ -95,4 +95,14 @@
     border-radius: 4px;
     border: none;
     outline: none;
+    cursor: pointer;
+}
+
+.button-add-shopping-cart{
+    background-color: #2c82df;
+    color: #fff;
+}
+.button-buy-certainly{
+    background-color: #ffbd4c;
+    color: #000;
 }

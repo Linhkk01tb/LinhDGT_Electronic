@@ -16,11 +16,6 @@
             @Html.HiddenFor(x => x.DanhMucID)
             <div class="form-mode">
                 <div class="item">
-                    <label for="">Mã danh mục</label>
-                    @Html.TextBoxFor(x => x.DanhMucCode, new { @class = "input", @placeholder = "Nhập mã danh mục..." })
-                    @Html.ValidationMessageFor(x => x.DanhMucCode, null, new { @style = "color:red" })
-                </div>
-                <div class="item">
                     <label for="">Tên danh mục</label>
                     @Html.TextBoxFor(x => x.DanhMucName, new { @class = "input", @placeholder = "Nhập tên danh mục..." })
                     @Html.ValidationMessageFor(x => x.DanhMucName, null, new { @style = "color:red" })

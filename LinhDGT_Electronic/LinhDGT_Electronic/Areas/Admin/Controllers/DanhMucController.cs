@@ -68,7 +68,6 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
                     model.DanhMucStatus = 1;
                 else model.DanhMucStatus = 2;
                 _dbContext.DanhMucs.Attach(model);
-                _dbContext.Entry(model).Property(x => x.DanhMucCode).IsModified = true;
                 _dbContext.Entry(model).Property(x => x.DanhMucName).IsModified = true;
                 _dbContext.Entry(model).Property(x => x.DanhMucStatus).IsModified = true;
                 _dbContext.Entry(model).Property(x => x.DanhMucDescription).IsModified = true;

@@ -1,0 +1,177 @@
+﻿
+@model PagedList.PagedList<LinhDGT_Electronic.Models.EF.NhanVien>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Quản lý nhân viên";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Danh sách nhân viên</div>
+        <div class="page-search">
+            <input type="text" placeholder="Nhập từ khoá để tìm kiếm..." class="input-search">
+            <button class="button-search">
+                <img src="~/Content/assets/icon/magnifying-glass-solid.svg" alt="search"
+                     width="24">
+            </button>
+        </div>
+        <a class="button-admin-control-create" href="/admin/NhanVien/themNhanVien">Thêm mới</a>
+        <a class="button-admin-control-delete" id="button-delete-all" style="display:flex;justify-content:center;align-items:center"><i class="fa-solid fa-trash"></i></a>
+    </div>
+    <div class="body-content-admin">
+        <div class="table-content">
+
+            <table class="table-body">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="SelectAll"></th>
+                        <th>STT</th>
+                        <th>Tên nhân viên</th>
+                        <th>Ngày sinh</th>
+                        <th>Giới tính</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày làm việc</th>
+                        <th>Lương</th>
+                        <th>Trạng thái</th>
+                        <th colspan="3">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = 1;
+                        var status = "";
+                        var gender = "";
+                        foreach (var item in Model)
+                        {
+                            if (item.NhanVienStatus == 1)
+                            {
+                                status = "Kích hoạt";
+                            }
+                            else if (item.NhanVienStatus == 2)
+                            {
+                                status = "Vô hiệu";
+                            }
+                            if (item.NhanVienGender == 1)
+                            {
+                                gender = "Nam";
+                            }
+                            else if (item.NhanVienGender == 2)
+                            {
+                                gender = "Nữ";
+                            }
+                            else { gender = "Khác"; }
+                            <tr id="row_nhanvien_@item.NhanVienID">
+                                <td><input type="checkbox" value="@item.NhanVienID"></td>
+                                <td>@i</td>
+                                <td>@item.NhanVienName</td>
+                                <td>@item.NhanVienBirth.ToString("dd/MM/yyyy")</td>
+                                <td>@gender</td>
+                                <td>@item.NhanVienEmail</td>
+                                <td>@item.NhanVienPhoneNumber</td>
+                                <td>@item.NhanVienAddress</td>
+                                <td>@item.NhanVienWorkingDate</td>
+                                <td>@item.NhanVienSalary</td>
+                                <td>@status</td>
+                                <td style="display:flex; justify-content:center;border:unset"><a class="button-admin-control-edit" href="/admin/NhanVien/suaNhanVien/@item.NhanVienID"><i class="fa-solid fa-pen"></i></a></td>
+                                <td style="display:flex; justify-content:center;border:unset"><a data-id="@item.NhanVienID" class="button-admin-control-edit button-delete-nhanvien-by-id" style="background-color:red;border-color:red"><i class="fa-solid fa-trash"></i></a></td>
+                            </tr>
+                            i++;
+                        }
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="13">Không có bản ghi</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="body-footer">
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+        <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '#button-delete-all', function (e) {
+            e.preventDefault();
+            var str = "";
+            var checkbox = $(this).parents('.body').find('tr td input:checkbox');
+            var i = 0;
+            checkbox.each(function () {
+
+                if (this.checked) {
+                    checkbox.attr('selected', 'checked');
+                    var _id = $(this).val();
+                    if (i === 0) {
+                        str += _id;
+                    }
+                    else {
+                        str += "," + _id;
+                    }
+                    i++;
+                } else {
+                    checkbox.attr('selected', '');
+
+                }
+            });
+            if (str.length > 0) {
+                var conf = confirm("Xoá các bản ghi đã chọn?");
+                if (conf === true) {
+                    $.ajax({
+                        url: '/admin/nhanvien/XoaTatCa',
+                        type: 'POST',
+                        data: { ids: str },
+                        success: function (rs) {
+                            if (rs.success) {
+                                location.reload();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        $('body').on('change', '#SelectAll', function () {
+
+            var checkedStatus = this.checked;
+            //alert(checkedStatus);
+            var checkbox = $(this).parents('.table-body').find('tr td input:checkbox');
+            checkbox.each(function () {
+                this.checked = checkedStatus;
+                if (this.checked) {
+                    checkbox.attr('selected', 'checked');
+                } else {
+                    checkbox.attr('selected', '');
+                }
+            });
+        });
+        $('body').on('click', '.button-delete-nhanvien-by-id', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Xoá bản ghi?');
+            if (conf === true) {
+                $.ajax({
+                    url: '/admin/NhanVien/xoaNhanVien',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            $('#row_nhanvien_' + id).remove();
+                            location.reload();
+                            alert('Đã xoá!');
+                        }
+
+                    }
+                });
+            }
+        });
+    });
+</script>
+

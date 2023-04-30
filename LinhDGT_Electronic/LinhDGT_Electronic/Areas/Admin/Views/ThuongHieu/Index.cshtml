@@ -21,14 +21,12 @@
     <div class="body-content-admin">
         <div class="table-content">
 
-            <table class="table-body" border="1">
+            <table class="table-body">
                 <thead>
                     <tr>
                         <th><input type="checkbox"></th>
                         <th>STT</th>
-                        <th>Mã thương hiệu</th>
                         <th>Tên thương hiệu</th>
-                        <th>Mô tả</th>
                         <th>Trạng thái</th>
                         <th colspan="2">Thao tác</th>
                     </tr>
@@ -52,9 +50,7 @@
                             <tr id="row_thuonghieu_@item.ThuongHieuID">
                                 <td><input type="checkbox"></td>
                                 <td>@i</td>
-                                <td>@item.ThuongHieuCode</td>
                                 <td>@item.ThuongHieuName</td>
-                                <td>@item.ThuongHieuDescription</td>
                                 <td>@status</td>
                                 <td style="display:flex; justify-content:center;border:unset"><a class="button-admin-control-edit" href="/admin/thuonghieu/suathuonghieu/@item.ThuongHieuID"><i class="fa-solid fa-pen"></i></a></td>
                                 <td style="display:flex; justify-content:center;border:unset"><a data-id="@item.ThuongHieuID" class="button-admin-control-edit button-delete-thuonghieu-by-id" style="background-color:red;border-color:red"><i class="fa-solid fa-trash"></i></a></td>
@@ -92,10 +88,12 @@
                     success: function (rs) {
                         if (rs.success) {
                             $('#row_thuonghieu_' + id).remove();
+                            location.reload();
+                            alert('Đã xoá!');
                         }
                     }
                 });
-                alert('Đã xoá!');
+               
             }
         });
     });

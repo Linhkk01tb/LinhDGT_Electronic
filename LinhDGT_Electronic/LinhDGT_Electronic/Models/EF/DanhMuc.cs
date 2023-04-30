@@ -20,14 +20,12 @@ namespace LinhDGT_Electronic.Models.EF
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DanhMucID { get; set; }
-        [Required(ErrorMessage ="Mã danh mục không được để trống!")]
-        public string DanhMucCode { get; set; }
         [Required(ErrorMessage = "Tên danh mục không được để trống!")]
         public string DanhMucName { get; set; }
         
         [AllowHtml]
         public string DanhMucDescription { get; set; }
         public int DanhMucStatus { get; set; }
-        public ICollection<SanPham> SanPhams { get; set; }
+        public virtual ICollection<SanPham> SanPhams { get; set; }
     }
 }

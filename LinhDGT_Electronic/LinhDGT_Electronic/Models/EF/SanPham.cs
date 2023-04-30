@@ -13,18 +13,18 @@ namespace LinhDGT_Electronic.Models.EF
     {
         public SanPham() {
             this.AnhSanPhams = new HashSet<AnhSanPham>();
+            this.ChiTietDonHangs = new HashSet<ChiTietDonHang>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SanPhamID { get; set; }
-        [Required(ErrorMessage ="Mã sản phẩm không được rỗng!")]
-        public string SanPhamCode { get; set; }
         [Required(ErrorMessage = "Tên sản phẩm không được rỗng!")]
         public string SanPhamName { get; set; }
-        [Required(ErrorMessage = "Ảnh đại diện là bắt buộc!")]
+
+        [Required(ErrorMessage ="Ảnh đại diện là trường bắt buộc!")]
         public string SanPhamImage { get; set; }
         [Required(ErrorMessage = "Năm sản xuất không được rỗng!")]
-        public string SanPhamProducedYear { get; set; }
+        public int SanPhamProducedYear { get; set; }
 
         [AllowHtml]
         public string SanPhamDescription { get; set; }
@@ -37,6 +37,8 @@ namespace LinhDGT_Electronic.Models.EF
         public int SanPhamStatus { get; set; }
         public virtual DanhMuc DanhMuc { get; set;}
         public virtual ThuongHieu ThuongHieu { get; set;}
-        public ICollection<AnhSanPham> AnhSanPhams { get;set; }
+        public virtual ICollection<AnhSanPham> AnhSanPhams { get;set; }
+
+        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get;set; }
     }
 }

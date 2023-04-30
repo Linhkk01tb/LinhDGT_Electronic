@@ -1,5 +1,6 @@
 ﻿@model LinhDGT_Electronic.Models.RegisterViewModel
 @{
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
     ViewBag.Title = "Đăng ký";
 }
 
@@ -31,10 +32,12 @@
         <div class="item">
             <label for="Password" class="item-label">Mật khẩu</label>
             @Html.PasswordFor(m => m.Password, new { @class = "input", @placeholder = "Nhập mật khẩu..." })
+            @Html.ValidationMessageFor(m => m.Password, null, new { @style = "color:red" })
         </div>
         <div class="item">
             <label for="ConfirmPassword" class="item-label">Xác nhận mật khẩu</label>
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input", @placeholder = "Nhập lại mật khẩu..." })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @style = "color:red" })
         </div>
         <div class="item" style="background-color:unset;display:flex;justify-content:center;align-items:center">
             <button type="submit" class="button-sign-in-up">Đăng ký</button>

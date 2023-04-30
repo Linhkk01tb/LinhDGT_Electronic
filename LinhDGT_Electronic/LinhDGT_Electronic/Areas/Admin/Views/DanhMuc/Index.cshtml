@@ -26,9 +26,7 @@
                     <tr>
                         <th><input type="checkbox"></th>
                         <th>STT</th>
-                        <th>Mã danh mục</th>
                         <th>Tên danh mục</th>
-                        <th>Mô tả</th>
                         <th>Trạng thái</th>
                         <th colspan="2">Thao tác</th>
                     </tr>
@@ -52,9 +50,7 @@
                             <tr id="row_danhmuc_@item.DanhMucID">
                                 <td><input type="checkbox"></td>
                                 <td>@i</td>
-                                <td>@item.DanhMucCode</td>
                                 <td>@item.DanhMucName</td>
-                                <td>@item.DanhMucDescription</td>
                                 <td>@status</td>
                                 <td style="display:flex; justify-content:center;border:unset"><a class="button-admin-control-edit" href="/admin/danhmuc/suadanhmuc/@item.DanhMucID"><i class="fa-solid fa-pen"></i></a></td>
                                 <td style="display:flex; justify-content:center;border:unset"><a data-id="@item.DanhMucID" class="button-admin-control-edit button-delete-danhmuc-by-id" style="background-color:red;border-color:red"><i class="fa-solid fa-trash"></i></a></td>
@@ -92,11 +88,13 @@
                     success: function (rs) {
                         if (rs.success) {
                             $('#row_danhmuc_' + id).remove();
+                            location.reload();
                             alert('Đã xoá!');
                         }
                     }
                 });
             }
         });
+
     });
 </script>

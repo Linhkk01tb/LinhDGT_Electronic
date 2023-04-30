@@ -17,8 +17,6 @@ namespace LinhDGT_Electronic.Models.EF
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonHangID { get; set; }
         [Required]
-        public string DonHangCode { get; set; }
-        [Required]
         public string DonHangReceiverName { get; set; }
         [Required]
         public string DonHangReceiverPhoneNumber { get; set; }
@@ -31,7 +29,7 @@ namespace LinhDGT_Electronic.Models.EF
         public DateTime DonHangCreatedDate { get; set; }
         public DateTime DonHangModifiedDate { get; set; }
 
-        public ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
+        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
         public virtual KhachHang KhachHang { get; set; }
     }
 }

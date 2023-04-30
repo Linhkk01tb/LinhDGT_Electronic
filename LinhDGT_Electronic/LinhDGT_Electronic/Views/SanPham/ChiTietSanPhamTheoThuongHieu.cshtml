@@ -1,0 +1,118 @@
+﻿@model LinhDGT_Electronic.Models.EF.SanPham
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="body">
+    <div class="body-title">
+        <a href="/home/index">Home</a>
+        <span>/</span>
+        <a href="/sanpham/sanphamtheothuonghieu/@Model.ThuongHieu.ThuongHieuID">@ViewBag.thuonghieu</a>
+        <span style="overflow: hidden; text-overflow: ellipsis; width: 100px">/ @Model.SanPhamName</span>
+    </div>
+    <div class="body-content" style="background-color:#57ccff">
+        <div class="fixed-screen">
+            <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+            <img id="expandedImg" style="position:absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);" width="600">
+        </div>
+        <div class="product-detail">
+            <div class="product-detail-left">
+                <div class="avatar-img">
+                    <img src="~/Content/assets/images/@Model.SanPhamImage" alt="" class="avt-img" style="cursor:pointer" onclick="myFunction(this);">
+                </div>
+                <div class="images-group" style="flex-wrap:nowrap;white-space:nowrap">
+                    @if (Model.AnhSanPhams != null && Model.AnhSanPhams.Any())
+                    {
+                        foreach (var item in Model.AnhSanPhams)
+                        {
+                            <div class="item-img">
+                                <img src="@item.AnhName" style="width:100%;cursor:pointer" onclick="myFunction(this);">
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="product-detail-right">
+
+                <div class="item">
+                    Thương hiệu: @Model.ThuongHieu.ThuongHieuName
+                </div>
+                <div class="item">
+                    Tên sản phẩm:<div style="width:100%;white-space:normal;overflow:hidden;overflow-wrap:break-word">@Model.SanPhamName</div>
+                </div>
+                <div class="item">
+                    Giá tiền: @Model.SanPhamUnitPrice.ToString("0,0 VNĐ")
+                </div>
+                <div class="item">
+                    Số lượng mua: <input type="number" min="1" max="@Model.SanPhamQuantity" class="input" name="soluongmua" id="soluongmua" value="1" style="width:80px" required />
+                </div>
+                <div class="item">
+                    Số lượng sẵn có: @Model.SanPhamQuantity.ToString("0,0 sản phẩm")
+                </div>
+                <div class="item">
+                    <a class="button-add-shopping-cart button btnAddShoppingCart" href="" data-id="@Model.SanPhamID">
+                        <i class="fa-solid fa-cart-plus"></i> 
+                        <span style="padding-left:8px">
+                            Thêm vào giỏ hàng
+                        </span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <hr style="width: 100%;">
+        <div class="product-description">
+            <div class="product-description-title tab">
+                <button id="chitietsanpham" class="item tablinks" onclick="openFunc(event, 'chitiet')">
+                    Chi tiết
+                    sản phẩm
+                </button>
+                <button id="sanphamlienquan" class="item tablinks" onclick="openFunc(event, 'lienquan')">
+                    Sản
+                    phẩm liên quan
+                </button>
+            </div>
+            <div class="product-description-content">
+                <div id="chitiet" class="tabcontent">
+                    @Model.SanPhamDescription
+                </div>
+                <div id="lienquan" class="tabcontent"
+                     style="width: 100%; display: flex; column-gap: 30px; align-items: center;">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+function myFunction(imgs) {
+        var expandImg = document.getElementById("expandedImg");
+        expandImg.src = imgs.src;
+        expandImg.parentElement.style.display = "block";
+}
+</script>
+
+
+<script>
+function openFunc(evt, content) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(content).style.display = "flex";
+        evt.currentTarget.className += " active";
+}
+document.getElementById("chitietsanpham").click();
+
+</script>

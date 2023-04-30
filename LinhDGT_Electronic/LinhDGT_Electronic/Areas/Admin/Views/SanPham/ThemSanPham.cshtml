@@ -4,21 +4,18 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div class="body">
-    <div class="body-title-admin">
-        <div class="title">Thêm mới sản phẩm</div>
-    </div>
-    <div class="body-content-admin" style="padding: 16px">
-        @using (Html.BeginForm("ThemSanPham", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
+<div class="body" style="overflow:auto">
+    @using (Html.BeginForm("ThemSanPham", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="body-title-admin">
+            <input type="button" value="Thêm thông tin" class="title-change" id="button-themthongtin" />
+            <input type="button" value="Thêm hình ảnh" class="title-change" id="button-themanh" />
+        </div>
+        <div class="body-content-admin" style="padding: 16px">
+
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-            <div class="form-mode">
-                <div class="item">
-                    <label for="">Mã sản phẩm</label>
-                    @Html.TextBoxFor(x => x.SanPhamCode, new { @class = "input", @placeholder = "Nhập mã sản phẩm...", @autocomplete = "off" })
-                    @Html.ValidationMessageFor(x => x.SanPhamCode, null, new { @style = "color:red" })
-                </div>
+            <div class="form-mode" id="form-thongtin">
                 <div class="item">
                     <label for="">Tên sản phẩm</label>
                     @Html.TextBoxFor(x => x.SanPhamName, new { @class = "input", @placeholder = "Nhập tên sản phẩm...", @autocomplete = "off" })
@@ -26,16 +23,11 @@
                 </div>
                 <div class="item">
                     <label for="" style="width:100%">Ảnh đại diện</label>
-                    @*<div style="width:100%;height:100%;position:relative;display:flex;flex-wrap:wrap">
-            @Html.TextBoxFor(x => x.SanPhamImage, new { @id = "InputImage", @class = "input", @autocomplete = "off", @placeholder = "Chọn ảnh..." })
-            <input type="button" value="Tải ảnh" style="position:absolute; right:0;height:30px;cursor:pointer" onclick="BrowerServer('InputImage');" />
-            @Html.ValidationMessageFor(x => x.SanPhamImage, null, new { @style = "color:red" })
-        </div>*@
-                    <img src="~/Content/assets/images/h0.png" class="img-rounded" width="180" height="200" id="output" />
-                    <label for="upfile" style="cursor:pointer">
+                    <img src="~/Content/assets/images/h0.png" width="200" id="output" />
+                    <label for="ufile" style="cursor:pointer">
                         Chọn ảnh
                     </label>
-                    <input type="file" name="SanPhamImage" id="upfile" onchange="uploadFile(event)" style="display:none" />
+                    <input type="file" name="SanPhamImage" id="ufile" onchange="uploadFile(event)" style="display:none" />
                     @Html.ValidationMessageFor(x => x.SanPhamImage, null, new { @style = "color:red" })
                 </div>
                 <div class="item">
@@ -75,16 +67,35 @@
                     @Html.TextAreaFor(x => x.SanPhamDescription, new { @class = "text-area", @placeholder = "Nhập mô tả...", @id = "text-area-description" })
                     @Html.ValidationMessageFor(x => x.SanPhamDescription, null, new { @class = "text-danger" })
                 </div>
-                <div class="item" style="justify-content: end; column-gap: 16px;">
-                    <a href="/admin/SanPham/index" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Quay lại</a>
-                    <button class="button-pop-up-footer" type="submit">Xác nhận</button>
+            </div>
+            <div class="form-mode" id="form-themanh" style="display:none">
+                <div class="item">
+                    <input type="button" id="iTaiAnh" onclick="BrowerServer();" value="Tải ảnh" />
+                </div>
+                <div class="item">
+                    <table style="border-collapse:collapse;width:100%">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Hình ảnh</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbTable">
+                        
+                        </tbody>
+                    </table>
+                    <input type="hidden" id="tCurrentId" value="0" />
                 </div>
             </div>
-        }
-    </div>
-    <div class="body-footer">
+           
+        </div>
 
-    </div>
+        <div class="body-footer" style="justify-content: end; column-gap: 16px;padding-right: 30px">
+            <a href="/admin/SanPham/index" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Quay lại</a>
+            <button class="button-pop-up-footer" type="submit">Xác nhận</button>
+        </div>
+    }
 </div>
 <script>
     $(document).ready(function () {
@@ -96,15 +107,62 @@
     function BrowerServer(field) {
         var finder = new CKFinder();
         finder.selectActionFunction = function (fileUrl) {
-            document.getElementById(field).value = fileUrl;
+            themAnh(fileUrl);
         };
         finder.popup();
+    }
+    function themAnh(url) {
+        var temp = $("#tCurrentId").val();
+        var currentId = parseInt(temp) + 1;
+        var str = "";
+        if (currentId == 1) {
+            str += `<tr id="row_anhsanpham_${currentId}">
+                    <td>${currentId}</td>
+                    <td><img src="${url}" width="80"> <input type="hidden" value="${url}" name="Images" /></td>
+                    <td style="display:flex; justify-content:center;border:unset;align-items:center"><a data-id="${currentId}" class="button-admin-control-edit button-delete-thuonghieu-by-id" style="background-color:red;border-color:red"><i class="fa-solid fa-trash"></i></a></td>
+                    </tr>`;
+        }
+        else {
+            str += `<tr id="row_anhsanpham_${currentId}">
+                    <td>${currentId}</td>
+                    <td><img src="${url}" width="80"> <input type="hidden" value="${url}" name="Images" /></td>
+                    <td style="display:flex; justify-content:center;border:unset;align-items:center"><a data-id="${currentId}" class="button-admin-control-edit button-delete-thuonghieu-by-id" style="background-color:red;border-color:red"><i class="fa-solid fa-trash"></i></a></td>
+                    </tr>`;
+        }
+        $('#tbTable').append(str);
+        $('#tCurrentId').val(currentId);
+        $('#tbTable tr td a').each(function () {
+            $(this).click(function () {
+                var conf = confirm('Xoá ảnh?');
+                if (conf === true) {
+                    var _id = $(this).data('id');
+                    $('#row_anhsanpham_' + _id).remove();
+                    var currentId = parseInt(temp) - 1;
+                    $('#tCurrentId').val(currentId);
+                }
+            });
+        });
+
     }
 </script>
 <script>
     var uploadFile = function (event) {
         var image = document.getElementById('output');
         image.src = URL.createObjectURL(event.target.files[0]);
+    }
+    $("#button-themthongtin").click(function () {
+        $("#form-thongtin").show();
+        $("#form-themanh").hide();
+    })
+    $("#button-themanh").click(function () {
+        $("#form-themanh").show();
+        $("#form-thongtin").hide();
+    })
+</script>
+<script>
+    var uploadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0])
     }
 </script>
 @Scripts.Render("~/bundles/jqueryval")

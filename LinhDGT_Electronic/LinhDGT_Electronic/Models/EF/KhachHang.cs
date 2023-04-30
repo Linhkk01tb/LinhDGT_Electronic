@@ -14,9 +14,6 @@ namespace LinhDGT_Electronic.Models.EF
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int KhachHangID { get; set; }
-
-        [Required]
-        public string KhachHangCode { get; set; }
         [Required]
         public string KhachHangUserName { get; set; }
         [Required]

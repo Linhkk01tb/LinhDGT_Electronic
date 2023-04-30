@@ -39,7 +39,7 @@ body {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
   
 }
 
@@ -57,4 +57,9 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
+}
+
+a{
+    text-decoration: none;
+    text-decoration-color: #000;
 }

@@ -1,0 +1,92 @@
+﻿@model LinhDGT_Electronic.Models.EF.NhanVien
+@{
+    ViewBag.Title = "Thêm nhân viên";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Thêm mới nhân viên</div>
+    </div>
+    <div class="body-content-admin" style="padding: 16px">
+        @using (Html.BeginForm("ThemNhanVien", "NhanVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+        <div class="form-mode">
+            <div class="item">
+                <label for="">Tên nhân viên</label>
+                @Html.TextBoxFor(x => x.NhanVienName, new { @class = "input", @placeholder = "Nhập tên nhân viên...", @autocomplete = "off" })
+                @Html.ValidationMessageFor(x => x.NhanVienName, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="" style="width:100%">Ngày sinh</label>
+                @Html.TextBoxFor(x => x.NhanVienBirth, new { @class = "input", @placeholder = "Nhập ngày sinh...", @autocomplete = "off", @type = "date" })
+                @Html.ValidationMessageFor(x => x.NhanVienBirth, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="">Giới tính</label>
+                @{
+                    IEnumerable<string> gender = new List<string> { "Nam", "Nữ" };
+                }
+                @Html.DropDownList("gender", new SelectList(gender, gender.FirstOrDefault()), new { @class = "input" })
+            </div>
+            <div class="item">
+                <label for="">Email</label>
+                @Html.TextBoxFor(x => x.NhanVienEmail, new { @class = "input", @placeholder = "Nhập email...", @autocomplete = "off" })
+                @Html.ValidationMessageFor(x => x.NhanVienEmail, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="" style="width:100%">Số điện thoại</label>
+                @Html.TextBoxFor(x => x.NhanVienPhoneNumber, new { @class = "input", @placeholder = "Nhập số điện thoại..." })
+                @Html.ValidationMessageFor(x => x.NhanVienPhoneNumber, null, new { @class = "text-danger" })
+            </div>
+            <div class="item">
+                <label for="">Địa chỉ</label>
+                @Html.TextBoxFor(x => x.NhanVienAddress, new { @class = "input", @placeholder = "Nhập địa chỉ...", @autocomplete = "off" })
+                @Html.ValidationMessageFor(x => x.NhanVienAddress, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="">Số ngày làm việc</label>
+                @Html.TextBoxFor(x => x.NhanVienWorkingDate, new { @class = "input", @placeholder = "Nhập số ngày làm việc...", @autocomplete = "off" })
+                @Html.ValidationMessageFor(x => x.NhanVienWorkingDate, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="" style="width:100%">Lương</label>
+                @Html.TextBoxFor(x => x.NhanVienSalary, new { @class = "input", @placeholder = "Nhập lương..." })
+                @Html.ValidationMessageFor(x => x.NhanVienSalary, null, new { @class = "text-danger" })
+            </div>
+            <div class="item">
+                <label for="">Trạng thái</label>
+                @{
+                    IEnumerable<string> status = new List<string> { "Kích hoạt", "Vô hiệu" };
+                }
+                @Html.DropDownList("status", new SelectList(status, status.FirstOrDefault()), new { @class = "input" })
+            </div>
+            <div class="item" style="justify-content: end; column-gap: 16px;">
+                <a href="/admin/NhanVien/index" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Quay lại</a>
+                <button class="button-pop-up-footer" type="submit">Xác nhận</button>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="body-footer">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace('text-area-description', {
+            customConfig: '/content/ckeditor/config.js',
+            extraAllowedContent: 'span',
+        });
+    });
+    function BrowerServer(field) {
+        var finder = new CKFinder();
+        finder.selectActionFunction = function (fileUrl) {
+            document.getElementById(field).value = fileUrl;
+        };
+        finder.popup();
+    }
+</script>
+@Scripts.Render("~/bundles/jqueryval")

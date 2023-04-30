@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/container.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../assets/icon/favicon-96x96.png">
     <title>Trang chủ</title>
 </head>
 
@@ -67,18 +68,97 @@
 
             </div>
             <div class="body-content">
-               <div class="product-detail">
-                <div class="product-detail-left">
-                    <div class="avatar-img">
-                        <img src="../../assets/images/1.jpg" alt="">
+                <div class="product-detail">
+                    <div class="product-detail-left">
+                        <div class="avatar-img">
+                            <img src="../../assets/images/1.jpg" alt="" class="avt-img">
+                        </div>
+                        <div class="item-img">
+                            <img src="../../assets/images/1.jpg" alt="" sizes="" srcset="">
+                        </div>
+                        <div class="item-img">
+                            <img src="../../assets/images/1.jpg" alt="" sizes="" srcset="">
+                        </div>
+                        <div class="item-img">
+                            <img src="../../assets/images/1.jpg" alt="" sizes="" srcset="">
+                        </div>
+                    </div>
+                    <div class="product-detail-right">
+
+                        <div class="item">
+                            Thương hiệu:
+                        </div>
+                        <div class="item">
+                            Tên sản phẩm:
+                        </div>
+                        <div class="item">
+                            Giá tiền:
+                        </div>
+                        <div class="item">
+                            Số lượng mua:
+                        </div>
+                        <div class="item">
+                            Số lượng sẵn có:
+                        </div>
+                        <div class="item">
+                            <button class="button-add-shopping-cart button"><i class="fa-solid fa-cart-plus"></i> Thêm
+                                vào giỏ hàng</button>
+                            <button class="button-buy-certainly button">Mua ngay</button>
+                        </div>
+
                     </div>
                 </div>
-                <div class="product-detail-right"></div>
-               </div>
+                <hr style="width: 100%;">
+                <div class="product-description">
+                    <div class="product-description-title tab">
+                        <button id="chitietsanpham" class="item tablinks" onclick="openFunc(event, 'chitiet')">Chi tiết
+                            sản phẩm</button>
+                        <button id="sanphamlienquan" class="item tablinks" onclick="openFunc(event, 'lienquan')">Sản
+                            phẩm liên quan</button>
+                    </div>
+                    <div class="product-description-content">
+                        <div id="chitiet" class="tabcontent">
+                            he1
+                        </div>
+                        <div id="lienquan" class="tabcontent"
+                            style="width: 100%; display: flex; column-gap: 30px; align-items: center;">
+                            <div class="item">
+                                <div class="item-img">
+                                    <img src="../../assets/images/1.jpg" style="width: 100%; height: 100%;">
+                                </div>
+                                <div class="item-name">Laptop acer chất lượng</div>
+                                <div class="item-cost">$2000000</div>
+                                <div class="item-control">
+                                    <a href="" class="item-detail tooltip"><i class="fa-solid fa-eye"></i>
+                                        <span class="tooltiptext">Xem chi tiết</span>
+                                    </a>
+                                    <a href="" class="item-shopping-add tooltip"><i
+                                            class="fa-solid fa-cart-shopping"></i>
+                                        <span class="tooltiptext">Thêm vào giỏ hàng</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-img">
+                                    <img src="../../assets/images/1.jpg" style="width: 100%; height: 100%;">
+                                </div>
+                                <div class="item-name">Laptop acer chất lượng</div>
+                                <div class="item-cost">$2000000</div>
+                                <div class="item-control">
+                                    <a href="" class="item-detail tooltip"><i class="fa-solid fa-eye"></i>
+                                        <span class="tooltiptext">Xem chi tiết</span>
+                                    </a>
+                                    <a href="" class="item-shopping-add tooltip"><i
+                                            class="fa-solid fa-cart-shopping"></i>
+                                        <span class="tooltiptext">Thêm vào giỏ hàng</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="body-footer">
 
-            </div>
 
         </div>
         <div class="footer">
@@ -90,3 +170,20 @@
 </body>
 
 </html>
+<script>
+    function openFunc(evt, content) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(content).style.display = "flex";
+        evt.currentTarget.className += " active";
+    }
+    document.getElementById("chitietsanpham").click();
+
+</script>

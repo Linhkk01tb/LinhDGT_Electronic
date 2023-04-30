@@ -1,0 +1,10 @@
+﻿@model IEnumerable<LinhDGT_Electronic.Models.EF.DanhMuc>
+<div class="children-items" id="category-items">
+    @foreach (var item in Model)
+    {
+        <a class="children" href="/sanpham/sanphamtheodanhmuc/@item.DanhMucID">
+            @item.DanhMucName
+        </a>
+    }
+
+</div>

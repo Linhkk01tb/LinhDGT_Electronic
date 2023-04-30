@@ -16,11 +16,6 @@
             @Html.HiddenFor(x => x.ThuongHieuID)
             <div class="form-mode">
                 <div class="item">
-                    <label for="">Mã thương hiệu</label>
-                    @Html.TextBoxFor(x => x.ThuongHieuCode, new { @class = "input", @placeholder = "Nhập mã thương hiệu...", @autocomplete = "off" })
-                    @Html.ValidationMessageFor(x => x.ThuongHieuCode, null, new { @style = "color:red" })
-                </div>
-                <div class="item">
                     <label for="">Tên thương hiệu</label>
                     @Html.TextBoxFor(x => x.ThuongHieuName, new { @class = "input", @placeholder = "Nhập tên thương hiệu...", @autocomplete = "off" })
                     @Html.ValidationMessageFor(x => x.ThuongHieuName, null, new { @style = "color:red" })
