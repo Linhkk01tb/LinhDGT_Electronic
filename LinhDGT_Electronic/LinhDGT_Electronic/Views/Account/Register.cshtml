@@ -6,9 +6,9 @@
 
 <div class="page-form">
     <div class="page-form-header">
-        <div class="header-logo">
+        <a class="header-logo"  href="/home/index">
             <img src="~/Content/assets/images/DLcut.png" width="200" />
-        </div>
+        </a>
         <div class="header-title" style="background-color: #F1F4FF">LinhDGT Electronic Đăng ký</div>
     </div>
     <div class="page-form-content">
@@ -27,7 +27,12 @@
         <div class="item">
             @Html.LabelFor(m => m.Email, new { @class = "item-label" })
             @Html.TextBoxFor(m => m.Email, new { @class = "input", @placeholder = "Nhập email..." })
-            @Html.ValidationMessageFor(m => m.Email,null, new { @style="color:red"})
+            @Html.ValidationMessageFor(m => m.Email, null, new { @style = "color:red" })
+        </div>
+        <div class="item">
+            <label>Tài khoản</label>
+            @Html.TextBoxFor(m => m.UserName, new { @class = "input", @placeholder = "Nhập tên tài khoản..." })
+            @Html.ValidationMessageFor(m => m.UserName, null, new { @style = "color:red" })
         </div>
         <div class="item">
             <label for="Password" class="item-label">Mật khẩu</label>
@@ -41,11 +46,11 @@
         </div>
         <div class="item" style="background-color:unset;display:flex;justify-content:center;align-items:center">
             <button type="submit" class="button-sign-in-up">Đăng ký</button>
-            <br/>
+            <br />
             <hr style="width: 100%;">
             <span>Đã có tài khoản? @Html.ActionLink("Đăng nhập ngay", "Login", "Account")</span>
         </div>
-       
+
     </div>
 
         }

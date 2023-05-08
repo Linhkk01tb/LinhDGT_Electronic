@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@model PagedList.PagedList<LinhDGT_Electronic.Models.ApplicationUser>
+@using PagedList;
+@using PagedList.Mvc;
+@{ 
+    ViewBag.Title = "Quản lý tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Danh sách tài khoản</div>
+        @using (Html.BeginForm())
+        {
+            <div class="page-search">
+                @Html.TextBox("timkiem", ViewBag.boloc as string, new { @class = "input-search", @placeholder = "Nhập từ khoá để tìm kiếm" })
+                <input type="submit" class="button-search" value="Tìm kiếm" />
+            </div>
+        }
+        <a class="button-admin-control-create" href="/admin/taikhoan/themtaikhoan" style="margin-right:16px">Thêm mới</a>
+
+    </div>
+    <div class="body-content-admin">
+        <div class="table-content">
+
+            <table class="table-body">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>@Html.ActionLink("Email", "Index", new { sapxep = ViewBag.sapxeptheoten, boloc = ViewBag.boloc })</th>
+                        <th>Tài khoản</th>
+                        <th>Họ tên</th>
+                        <th style="width:70px">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = ((ViewBag.page - 1)*ViewBag.pagesize+1);
+                        foreach (var item in Model)
+                        {
+                            <tr id="row_taikhoan_@item.Id">
+                                <td>@i</td>
+                                <td>@item.Email</td>
+                                <td>@item.UserName</td>
+                                <td>@item.FullName</td>
+                                <td><a class="button-admin-control-edit button-delete-taikhoan-by-id" style="background-color:red" href="" data-id="@item.Id"><i class="fa fa-trash"></i> </a></td>
+                            </tr>
+                            i++;
+                        }
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7">Không có bản ghi</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="body-footer">
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sapxep = ViewBag.sapxep, boloc = ViewBag.boloc }))</div>
+        <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.button-delete-taikhoan-by-id', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Xoá bản ghi?');
+            if (conf === true) {
+                $.ajax({
+                    url: '/admin/taikhoan/xoataikhoan',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            $('#row_taikhoan_' + id).remove();
+                            location.reload();
+                            alert('Đã xoá!');
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+</script>
+
+

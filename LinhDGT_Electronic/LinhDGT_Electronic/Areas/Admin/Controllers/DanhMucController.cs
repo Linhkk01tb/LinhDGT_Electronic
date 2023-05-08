@@ -9,28 +9,75 @@ using System.Web.Mvc;
 
 namespace LinhDGT_Electronic.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DanhMucController : Controller
     {
         private ApplicationDbContext _dbContext = new ApplicationDbContext();
         // GET: Admin/DanhMuc
-        public ActionResult Index(int? page)
+
+        /// <summary>
+        /// Màn hình quản lý danh mục kết hợp tìm kiếm, phân trang, sắp xếp
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="timkiem"></param>
+        /// <param name="boloc"></param>
+        /// <param name="sapxep"></param>
+        /// <returns></returns>
+        public ActionResult Index(int? page, string timkiem, string boloc, string sapxep)
         {
+            ViewBag.sapxep = sapxep;
+            ViewBag.sapxeptheoten = String.IsNullOrEmpty(sapxep) ? "ten_desc" : "";
+            IEnumerable<DanhMuc> items = _dbContext.DanhMucs.OrderByDescending(x=>x.DanhMucID);
             var pagesize = 10;
-            if(page == null)
+            if (timkiem != null)
             {
                 page = 1;
             }
+            else
+            {
+                timkiem = boloc;
+            }
+            ViewBag.boloc = boloc;
+           
+            switch (sapxep)
+            {
+                case "ten_desc":
+                    items = items.OrderByDescending(p => p.DanhMucName);
+                    break;
+                default:
+                    items = items.OrderBy(p => p.DanhMucName);
+                    break;
+            }
+            if (page == null)
+            {
+                page = 1;
+            }
+            if (!string.IsNullOrEmpty(timkiem))
+            {
+                items = items.Where(x => x.DanhMucName.ToLower().Contains(timkiem));
+            }
             var pagenumber = page.HasValue ? Convert.ToInt32(page) : 1;
-            var items = _dbContext.DanhMucs.OrderByDescending(x => x.DanhMucID).ToPagedList(pagenumber, pagesize);
+            items = items.ToPagedList(pagenumber, pagesize);
+            ViewBag.page = page;
+            ViewBag.pagesize = pagesize;
             return View(items);
         }
-        [HttpGet]
+
+        /// <summary>
+        /// Màn hình thêm danh mục
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ThemDanhMuc()
         {
 
             return View();
         }
-
+        /// <summary>
+        /// Chức năng thêm danh mục
+        /// </summary>
+        /// <param name="f"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -50,12 +97,22 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        /// <summary>
+        /// Màn hình sửa danh mục
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult SuaDanhMuc(int id) {
             var item = _dbContext.DanhMucs.Find(id);
             return View(item);
         }
 
+        /// <summary>
+        /// Chức năng sửa danh mục
+        /// </summary>
+        /// <param name="f"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -76,7 +133,11 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
             }
             return View(model);
         }
-
+        /// <summary>
+        /// Chức năng xoá danh mục
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult XoaDanhMuc(int id)
         {

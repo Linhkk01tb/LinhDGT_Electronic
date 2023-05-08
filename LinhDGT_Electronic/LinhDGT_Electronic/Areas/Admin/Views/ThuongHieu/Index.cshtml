@@ -8,13 +8,13 @@
 <div class="body">
     <div class="body-title-admin">
         <div class="title">Danh sách thương hiệu</div>
-        <div class="page-search">
-            <input type="text" placeholder="Nhập từ khoá để tìm kiếm..." class="input-search">
-            <button class="button-search">
-                <img src="~/Content/assets/icon/magnifying-glass-solid.svg" alt="search"
-                     width="24">
-            </button>
-        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="page-search">
+                @Html.TextBox("timkiem", ViewBag.boloc as string, new { @class = "input-search", @placeholder = "Nhập từ khoá để tìm kiếm" })
+                <input type="submit" class="button-search" value="Tìm kiếm" />
+            </div>
+        }
         <a class="button-admin-control-create" href="/admin/ThuongHieu/themThuongHieu">Thêm mới</a>
         <button class="button-admin-control-delete"><i class="fa-solid fa-trash"></i></button>
     </div>
@@ -26,7 +26,7 @@
                     <tr>
                         <th><input type="checkbox"></th>
                         <th>STT</th>
-                        <th>Tên thương hiệu</th>
+                        <th>@Html.ActionLink("Tên thương hiệu", "Index", new { sapxep = ViewBag.sapxeptheoten, boloc = ViewBag.boloc })</th>
                         <th>Trạng thái</th>
                         <th colspan="2">Thao tác</th>
                     </tr>
@@ -34,7 +34,7 @@
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
-                        var i = 1;
+                        var i = ((ViewBag.page - 1) * ViewBag.pagesize + 1);
                         var status = "";
 
                         foreach (var item in Model)
@@ -71,7 +71,7 @@
         </div>
     </div>
     <div class="body-footer">
-        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sapxep = ViewBag.sapxep, boloc = ViewBag.boloc }))</div>
         <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
     </div>
 </div>

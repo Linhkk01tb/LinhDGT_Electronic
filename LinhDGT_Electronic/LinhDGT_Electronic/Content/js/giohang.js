@@ -48,8 +48,32 @@
             });
         }
     });
+    $('body').on('click', '#button-delete-all-cart', function () {
+        var conf = confirm('Xoá tất cả sản phẩm khỏi giỏ hàng?');
+        if (conf === true) {
+            XoaTatCa();
+        }
 
+    });
+    $('body').on('click', '.btn-huydon', function () {
+        var id = $(this).data("id");
+        var conf = confirm('Huỷ đơn hàng này?');
+        if (conf === true) {
+            $.ajax({
+                url: '/donhang/huydon',
+                type: 'POST',
+                data: { id: id },
+                success: function (rs) {
+                    if (rs.success) {
+                        location.reload();
+                        alert('Đơn hàng đã bị huỷ!');
+                    }
+                }
+            });
+        }
+    });
 });
+
 
 function HienThiSoLuongTrongGioHang() {
     $.ajax({
@@ -58,6 +82,27 @@ function HienThiSoLuongTrongGioHang() {
         success: function (rs) {
 
             $('#category_item').html(rs.count);
+        }
+    });
+}
+function LoadData() {
+    $.ajax({
+        url: '/giohang/index',
+        type: 'GET',
+        success: function (rs) {
+            $('#load_data').html(rs);
+        }
+    });
+}
+
+function XoaTatCa() {
+    $.ajax({
+        url: '/giohang/xoatatca',
+        type: 'POST',
+        success: function (rs) {
+            if (rs.success) {
+                LoadData();
+            }
         }
     });
 }

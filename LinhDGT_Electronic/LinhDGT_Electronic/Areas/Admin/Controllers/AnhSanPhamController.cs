@@ -8,17 +8,29 @@ using System.Web.Mvc;
 
 namespace LinhDGT_Electronic.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AnhSanPhamController : Controller
     {
         private ApplicationDbContext _dbContext = new ApplicationDbContext();
         // GET: Admin/AnhSanPham
+
+        /// <summary>
+        /// Màn hình quản lý hình ảnh của sản phẩm
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public ActionResult Index(int Id)
         {
             ViewBag.SanPhamId = Id;
             var items = _dbContext.AnhSanPhams.Where(x => x.SanPhamID == Id).ToList();
             return View(items);
         }
-
+        /// <summary>
+        /// Chức năng thêm ảnh
+        /// </summary>
+        /// <param name="SanPhamId"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ThemAnh(int SanPhamId, string url)
         {
@@ -32,7 +44,11 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
                 _dbContext.SaveChanges();
                 return Json(new { Success = true });
          }
-       
+        /// <summary>
+        /// Chức năng xoá ảnh
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult XoaAnh(int id)
         {
@@ -45,6 +61,12 @@ namespace LinhDGT_Electronic.Areas.Admin.Controllers
             }
             return Json(new { success = false });
         }
+
+        /// <summary>
+        /// Chức năng xoá nhiều ảnh được chọn
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult XoaTatCa(string ids)
         {

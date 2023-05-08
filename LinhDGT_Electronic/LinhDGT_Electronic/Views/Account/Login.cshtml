@@ -7,9 +7,9 @@
 
 <div class="page-form">
     <div class="page-form-header">
-        <div class="header-logo">
+        <a class="header-logo" href="/home/index">
             <img src="~/Content/assets/images/DLcut.png" width="200" />
-        </div>
+        </a>
         <div class="header-title" style="background-color: #F1F4FF">LinhDGT Electronic Đăng nhập</div>
     </div>
     <div class="page-form-content">
@@ -26,9 +26,9 @@
                     <span style="font-weight:700;font-size: 20px">Đăng nhập</span>
                 </div>
                 <div class="item">
-                    @Html.LabelFor(m => m.Email, new { @class = "item-label" })
-                    @Html.TextBoxFor(m => m.Email, new { @class = "input", @placeholder = "Nhập email..." })
-                    @Html.ValidationMessageFor(m => m.Email, null, new { @style = "color:red" })
+                    <label>Tài khoản</label>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "input", @placeholder = "Nhập email..." })
+                    @Html.ValidationMessageFor(m => m.UserName, null, new { @style = "color:red" })
                 </div>
                 <div class="item">
                     <label for="Password" class="item-label">Mật khẩu</label>
@@ -58,7 +58,6 @@
                 </div>
 
             </div>
-
         }
     </div>
 </div>

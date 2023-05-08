@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_LayoutGioHang.cshtml";
+}
+
+<div class="body-no-menu" style="background-color:aliceblue">
+    <div class="body-title">
+        <a href="/home/index">
+            Trang chủ
+        </a>
+        <span>/ @ViewBag.Title</span>
+    </div>
+    <div class="body-content-admin" style="display:flex">
+        @Html.Action("DatHangForm", "GioHang")
+
+        @Html.Action("ThongTinMuaHang", "GioHang")
+    </div>
+
+</div>

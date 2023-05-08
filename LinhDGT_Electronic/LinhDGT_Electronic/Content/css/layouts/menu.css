@@ -50,12 +50,14 @@
         .menu .menu-item .children-items .children {
             width: 100%;
             height: 30px;
-            background-color: #33CCCC;
+            background-color: #cfcfcf;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
         }
         .menu .menu-item .children-items .children:hover{
-            background-color:aquamarine;
+            background-color:#3eff6d;
+            color:#000;
+            border-radius: 10px;
         }

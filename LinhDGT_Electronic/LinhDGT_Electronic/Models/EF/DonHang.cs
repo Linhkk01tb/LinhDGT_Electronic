@@ -16,20 +16,27 @@ namespace LinhDGT_Electronic.Models.EF
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonHangID { get; set; }
-        [Required]
+        public string DonHangCode { get; set; }
+        [Required(ErrorMessage = "Tên người nhận không được để trống!")]
         public string DonHangReceiverName { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Số điện thoại không được để trống!")]
+        [Phone(ErrorMessage = "Số điện thoại không đúng định dạng!")]
         public string DonHangReceiverPhoneNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Địa chỉ email không được để trống!")]
+        [EmailAddress(ErrorMessage ="Email không đúng định dạng!")]
+        public string DonHangReceiverEmail { get; set; }
+        [Required(ErrorMessage = "Địa chỉ không được để trống!")]
         public string DonHangReceiverAddress { get; set; }
         public double DonHangTotalPayment { get; set; }
+        public int DonHangPayment { get; set; }
         public int DonHangStatus { get; set; }
-        
-        public int KhachHangID { get; set; }
         public DateTime DonHangCreatedDate { get; set; }
         public DateTime DonHangModifiedDate { get; set; }
 
+        public string UserId { get; set; }
+
         public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
-        public virtual KhachHang KhachHang { get; set; }
+
     }
 }
+

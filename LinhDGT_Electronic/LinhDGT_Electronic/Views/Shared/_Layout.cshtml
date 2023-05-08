@@ -19,16 +19,16 @@
             <div class="header-right">
                 <div class="page-title">LinhDGT Electronic</div>
                 @*<div class="page-search">
-                        <input type="text" placeholder="Nhập từ khoá tìm kiếm..." class="input-search">
-                        <button class="button-search">
-                            <img src="~/Content/assets/icon/magnifying-glass-solid.svg" alt="search"
-                                 width="24">
-                        </button>
-                    </div>*@
+                    <input type="text" placeholder="Nhập từ khoá tìm kiếm..." class="input-search">
+                    <button class="button-search">
+                        <img src="~/Content/assets/icon/magnifying-glass-solid.svg" alt="search"
+                             width="24">
+                    </button>
+                </div>*@
                 <div class="page-header-button">
                     <div class="user-control" style="position:relative">
                         <a class="header-button notice" id="notice"><i class="fa-solid fa-bell"></i></a>
-                        <span class="notice_item">0</span>
+
                     </div>
                     <div class="user-control">
                         <a class="header-button category" style="position:relative" href="/giohang">
@@ -46,14 +46,41 @@
                         <button class="header-button user"><i class="fa-solid fa-user"></i></button>
                         <div class="user-control-arrow"></div>
                         <div class="user-control-item">
-                            <div>@Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "button-user-control", id = "registerLink", @style = "width:100%;color:#000;display:flex;  text-decoration: none;    text-decoration-color: #000;" })</div>
-                            <div>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "button-user-control", id = "loginLink", @style = "width:100%;color:#000;display:flex;  text-decoration: none; text-decoration-color: #000;" })</div>
+                            @if (!Request.IsAuthenticated)
+                            {
+                                <div><i class="fa-solid fa-user-plus"></i>@Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "button-user-control", id = "registerLink", @style = "width:100%;color:#000;display:flex;  text-decoration: none;    text-decoration-color: #000;" })</div>
+                                <div><i class="fa-solid fa-right-from-bracket"></i>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "button-user-control", id = "loginLink", @style = "width:100%;color:#000;display:flex;  text-decoration: none; text-decoration-color: #000;" })</div>
+                            }
+                            else
+                            {
+                                <div><span style="width:100%;justify-content:start">Tài khoản: @User.Identity.Name</span></div>
+                                <div><a href="/manage/changepassword" style="width: 100%; justify-content: start">Đổi mật khẩu</a></div>
+                                <div><a href="/donhang/index/@User.Identity.Name" style="width: 100%; justify-content: start">Lịch sử mua hàng</a></div>
+                                <div>
+                                    <a href="javascript:document.getElementById('logoff').submit()" class="button-user-control" style="width: 100%; justify-content: start">
+                                        Đăng xuất <i class="fa-solid fa-right-from-bracket"></i>
+                                    </a>
+                                </div>
+                            }
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
+        @if (Request.IsAuthenticated)
+        {
+            <div style="display:none">
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logoff" }))
+                {
+                    @Html.AntiForgeryToken();
+                }
+            </div>
+
+        }
+
+
+
         <div class="menu">
             <div class="menu-item">
                 <div class="item" id="menu-category">
@@ -73,22 +100,7 @@
                 </div>
                 @Html.Action("MenuThuongHieu", "Menu")
             </div>
-            <div class="menu-item">
-                <div class="item" id="menu-controller">
-                    <div class="item-name">Bộ điều khiển</div>
-                    <div class="item-control">
-                        <span><i class="fa-solid fa-chevron-down"></i></span>
-                    </div>
-                </div>
-                <div class="children-items" id="controllers">
-                    <a href="" class="children">
-                        Sản phẩm mới nhất
-                    </a>
-                    <a href="" class="children">
-                        Sắp xếp theo giá
-                    </a>
-                </div>
-            </div>
+
         </div>
         @RenderBody()
         <div class="footer">
@@ -101,5 +113,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Content/js/giohang.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

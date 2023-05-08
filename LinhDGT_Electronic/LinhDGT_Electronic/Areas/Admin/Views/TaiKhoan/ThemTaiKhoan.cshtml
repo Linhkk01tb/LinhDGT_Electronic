@@ -1,0 +1,79 @@
+﻿@model LinhDGT_Electronic.Models.CreateAccountViewModel
+@{
+    ViewBag.Title = "ThemTaiKhoan";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Thêm mới tài khoản</div>
+    </div>
+    <div class="body-content-admin" style="padding: 16px">
+        @using (Html.BeginForm("ThemTaiKhoan", "TaiKhoan", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false)
+        <div class="form-mode">
+            <div class="item">
+                <label for="">Email</label>
+                @Html.TextBoxFor(x => x.Email, new { @class = "input", @placeholder = "Nhập email...", @autocomplete = "off" })
+                @Html.ValidationMessageFor(x => x.Email, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="" style="width:100%">Tài khoản</label>
+                @Html.TextBoxFor(x => x.UserName, new { @class = "input", @placeholder = "Nhập tên tài khoản...", @autocomplete = "off" })
+                @Html.ValidationMessageFor(x => x.UserName, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="" style="width:100%">Họ và tên</label>
+                @Html.TextBoxFor(x => x.FullName, new { @class = "input", @placeholder = "Nhập họ và tên...", @autocomplete = "off" })
+                @Html.ValidationMessageFor(x => x.FullName, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="" style="width:100%">Số điện thoại</label>
+                @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "input", @placeholder = "Nhập số điện thoại...", @autocomplete = "off" })
+                @Html.ValidationMessageFor(x => x.PhoneNumber, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="" style="width:100%">Mật khẩu</label>
+                @Html.PasswordFor(x => x.Password, new { @class = "input", @placeholder = "Nhập mật khẩu...", @autocomplete = "off", @type ="password" })
+                @Html.ValidationMessageFor(x => x.Password, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="" style="width:100%">Xác nhận mật khẩu</label>
+                @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "input", @placeholder = "Nhập lại mật khẩu...", @autocomplete = "off", @type = "password" })
+                @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="">Quyền hạn</label>
+                @Html.DropDownListFor(x=>x.Role, ViewBag.Role as SelectList, htmlAttributes: new { @class = "input" })
+            </div>
+            <div class="item" style="justify-content: end; column-gap: 16px;">
+                <a href="/admin/taikhoan/index" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Quay lại</a>
+                <button class="button-pop-up-footer" type="submit">Xác nhận</button>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="body-footer">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace('text-area-description', {
+            customConfig: '/content/ckeditor/config.js',
+            extraAllowedContent: 'span',
+        });
+    });
+    function BrowerServer(field) {
+        var finder = new CKFinder();
+        finder.selectActionFunction = function (fileUrl) {
+            document.getElementById(field).value = fileUrl;
+        };
+        finder.popup();
+    }
+</script>
+@Scripts.Render("~/bundles/jqueryval")
+
+

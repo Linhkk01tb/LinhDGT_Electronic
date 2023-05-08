@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace LinhDGT_Electronic.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class NhanVienController : Controller
     {
         // GET: Admin/NhanVien

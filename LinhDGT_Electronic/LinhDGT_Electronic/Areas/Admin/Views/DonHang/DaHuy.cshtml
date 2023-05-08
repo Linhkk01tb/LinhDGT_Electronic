@@ -1,0 +1,156 @@
+﻿
+@model PagedList.PagedList<LinhDGT_Electronic.Models.EF.DonHang>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Đơn hàng đã huỷ";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Danh sách đơn hàng</div>
+        @using (Html.BeginForm())
+        {
+            <div class="page-search" style="margin-right:16px">
+                @Html.TextBox("timkiem", ViewBag.boloc as string, new { @class = "input-search", @placeholder = "Nhập từ khoá để tìm kiếm" })
+                <input type="submit" class="button-search" value="Tìm kiếm" />
+            </div>
+        }
+
+    </div>
+    <div class="body-content-admin">
+        <div class="table-content" >
+            <table class="table-body">
+                <thead>
+                    <tr>
+
+                        <th>STT</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Người nhận</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+                        <th>@Html.ActionLink("Ngày đặt", "DaHuy", new { sapxep = ViewBag.sapxeptheongaytao, boloc = ViewBag.boloc })</th>
+                        <th>Trạng thái</th>
+                        <th colspan="2">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var status = "";
+                        var i = ((ViewBag.page - 1) * ViewBag.pagesize + 1);
+                        foreach (var item in Model)
+                        {
+                            if (item.DonHangStatus == 0)
+                            {
+                                status = "Chờ xử lý";
+                            }
+                            else if (item.DonHangStatus == 1)
+                            {
+                                status = "Đang giao";
+                            }
+                            else if (item.DonHangStatus == 2)
+                            {
+                                status = "Hoàn thành";
+                            }
+                            else if (item.DonHangStatus == 3)
+                            {
+                                status = "Đã huỷ";
+                            }
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.DonHangCode</td>
+                                <td>@item.DonHangReceiverName</td>
+                                <td>@item.DonHangReceiverPhoneNumber</td>
+                                <td>@item.DonHangReceiverEmail</td>
+                                <td>@item.DonHangReceiverAddress</td>
+                                <td>@item.DonHangCreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@status</td>
+                                <td><a class="button-admin-control-edit" href="/admin/donhang/chitietdonhang/@item.DonHangID"><i class="fa-solid fa-eye"></i></a></td>
+                                @{
+                                    if (item.DonHangStatus == 0)
+                                    {
+
+                                        <td><a class="button-admin-control-edit btn-giaohang" href="" data-id="@item.DonHangID"><i class="fa-solid fa-truck-fast"></i></a></td>
+                                    }
+                                    else if (item.DonHangStatus == 1)
+                                    {
+
+                                        <td><a class="button-admin-control-edit btn-hoanthanh" href="" data-id="@item.DonHangID" id="hoanthanh"><i class="fa-solid fa-check-to-slot"></i></a></td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                }
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="10">Không có bản ghi nào</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="body-footer">
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("DaHuy", new { page, sapxep = ViewBag.sapxep, boloc = ViewBag.boloc }))</div>
+        <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.btn-giaohang', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Đơn hàng sẽ được giao?');
+            if (conf === true) {
+                $.ajax({
+                    url: '/admin/donhang/giaohang',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            location.reload();
+                            alert('Đơn hàng đã được cập nhật thành "Đang giao"!');
+                        }
+                    }
+                });
+            }
+        });
+        $('body').on('click', '.btn-hoanthanh', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Đơn hàng đã được giao thành công?');
+            if (conf === true) {
+                $.ajax({
+                    url: '/admin/donhang/hoanthanh',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            location.reload();
+                            alert('Đơn hàng đã được cập nhật thành "Hoàn thành"!');
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+</script>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,107 @@
+﻿@model PagedList.PagedList<LinhDGT_Electronic.Models.EF.DonHang>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Đơn hàng đang xử lý";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">@ViewBag.Title</div>
+        <div class="menu-drop-down">
+            <button class="drop-button" style="border-radius:8px">Đơn hàng</button>
+            <div class="drop-item">
+                <a href="/donhang/index/@User.Identity.Name" class="item" style="display:flex;align-items:center;padding-left:8px;box-sizing:border-box">Tất cả</a>
+                <a href="/donhang/danggiao/@User.Identity.Name" class="item" style="display:flex;align-items:center;padding-left:8px;box-sizing:border-box">Đang giao</a>
+                <a href="/donhang/hoanthanh/@User.Identity.Name" class="item" style="display:flex;align-items:center;padding-left:8px;box-sizing:border-box">Hoàn thành</a>
+                <a href="/donhang/dahuy/@User.Identity.Name" class="item" style="display:flex;align-items:center;padding-left:8px;box-sizing:border-box">Đã huỷ</a>
+            </div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="page-search" style="margin-right:16px">
+                @Html.TextBox("timkiem", ViewBag.boloc as string, new { @class = "input-search", @placeholder = "Nhập từ khoá để tìm kiếm" })
+                <input type="submit" class="button-search" value="Tìm kiếm" />
+            </div>
+        }
+
+    </div>
+    <div class="body-content-admin">
+        <div class="table-content">
+            <table class="table-body">
+                <thead>
+                    <tr>
+                        <th style="width: 70px;">STT</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Người nhận</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+                        <th>@Html.ActionLink("Ngày đặt", "ChoXuLy", new { sapxep = ViewBag.sapxeptheongaytao, boloc = ViewBag.boloc })</th>
+                        <th>Trạng thái</th>
+                        <th style="text-align:center" colspan="2">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var status = "";
+                        var i = ((ViewBag.page - 1) * ViewBag.pagesize + 1);
+                        foreach (var item in Model)
+                        {
+                            if (item.DonHangStatus == 0)
+                            {
+                                status = "Chờ xử lý";
+                            }
+                            else if (item.DonHangStatus == 1)
+                            {
+                                status = "Đang giao";
+                            }
+                            else if (item.DonHangStatus == 2)
+                            {
+                                status = "Hoàn thành";
+                            }
+                            else if (item.DonHangStatus == 3)
+                            {
+                                status = "Đã huỷ";
+                            }
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.DonHangCode</td>
+                                <td>@item.DonHangReceiverName</td>
+                                <td>@item.DonHangReceiverPhoneNumber</td>
+                                <td>@item.DonHangReceiverEmail</td>
+                                <td>@item.DonHangReceiverAddress</td>
+                                <td>@item.DonHangCreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@status</td>
+                                <td><a class="button-admin-control-edit" href="/donhang/chitietdonhang/@item.DonHangID"><i class="fa-solid fa-eye"></i></a></td>
+                                @{
+                                    if (item.DonHangStatus == 0)
+                                    {
+
+                                        <td><a class="button-admin-control-edit btn-huydon" href="" data-id="@item.DonHangID" style="background-color:red;border-color:red"><i class="fa-solid fa-cancel"></i></a></td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                }
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="body-footer">
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("ChoXuLy", new { page, sapxep = ViewBag.sapxep, boloc = ViewBag.boloc }))</div>
+        <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+    </div>
+
+</div>
+
+
+
+

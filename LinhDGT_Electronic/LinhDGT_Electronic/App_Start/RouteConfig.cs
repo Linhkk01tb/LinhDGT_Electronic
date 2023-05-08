@@ -12,7 +12,7 @@ namespace LinhDGT_Electronic
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+           
             routes.MapRoute(
                 name: "chitietsanpham",
                 url: "sanpham/chitietsanpham/{sanphamid}",

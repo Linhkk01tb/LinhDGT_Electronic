@@ -5,7 +5,7 @@
 }
 <div class="body">
     <div class="body-title">
-        <a href="/home/index">Home</a>
+        <a href="/home/index">Trang chủ</a>
         <span style="overflow: hidden; text-overflow: ellipsis; width: 100px">/ @Model.SanPhamName</span>
     </div>
     <div class="body-content" style="background-color:#57ccff">
@@ -43,6 +43,9 @@
                     Giá tiền: @Model.SanPhamUnitPrice.ToString("0,0 VNĐ")
                 </div>
                 <div class="item">
+                    Năm sản xuất: @Model.SanPhamProducedYear
+                </div>
+                <div class="item">
                     Số lượng mua: <input type="number" min="1" max="@Model.SanPhamQuantity" class="input" name="soluongmua" id="soluongmua" value="1" style="width:80px" required />
                 </div>
                 <div class="item">
@@ -73,7 +76,7 @@
             </div>
             <div class="product-description-content">
                 <div id="chitiet" class="tabcontent">
-                    @Model.SanPhamDescription
+                    @Html.Raw(Model.SanPhamDescription)
                 </div>
                 <div id="lienquan" class="tabcontent"
                      style="width: 100%; display: flex; column-gap: 30px; align-items: center;">

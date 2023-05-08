@@ -28,7 +28,7 @@ body {
 }
 .page-form-content {
     width: 100%;
-    height: calc(100% - 60px);
+    height: calc(100% - 30px - 60px);
     background-color: #000000;
     display: flex;
 }

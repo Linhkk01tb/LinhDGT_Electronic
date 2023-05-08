@@ -6,10 +6,27 @@
     ViewBag.Title = ViewBag.name;
 }
 <div class="body">
-    <div class="body-title">
-        <a href="/home/index">Home</a>
-        <span>/ @ViewBag.name</span>
-
+    <div class="body-title-admin">
+        <div class="title">
+            <a href="/home/index">Trang chủ</a>
+            <span>/ @ViewBag.name</span>
+        </div>
+        <div class="menu-drop-down">
+            <button class="drop-button" style="border-radius:8px">Sắp xếp</button>
+            <div class="drop-item">
+                @Html.ActionLink(" Theo giá tiền", "SanPhamTheoDanhMuc", new { sapxep = ViewBag.sapxeptheogia, boloc = ViewBag.boloc }, new { @class = "item", @style = "display:flex;align-items:center;padding-left:8px;box-sizing:border-box" })
+                @Html.ActionLink(" Theo tên sản phẩm", "SanPhamTheoDanhMuc", new { sapxep = ViewBag.sapxeptheoten, boloc = ViewBag.boloc }, new { @class = "item", @style = "display:flex;align-items:center;padding-left:8px;box-sizing:border-box" })
+                @Html.ActionLink(" Theo ngày tạo", "SanPhamTheoDanhMuc", new { sapxep = ViewBag.sapxeptheongaytao, boloc = ViewBag.boloc }, new { @class = "item", @style = "display:flex;align-items:center;padding-left:8px;box-sizing:border-box" })
+                @Html.ActionLink(" Theo năm sản xuất", "SanPhamTheoDanhMuc", new { sapxep = ViewBag.sapxeptheonamsanxuat, boloc = ViewBag.boloc }, new { @class = "item", @style = "display:flex;align-items:center;padding-left:8px;box-sizing:border-box" })
+            </div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="page-search">
+                @Html.TextBox("timkiem", ViewBag.boloc as string, new { @class = "input-search", @placeholder = "Nhập từ khoá để tìm kiếm" })
+                <input type="submit" class="button-search" value="Tìm kiếm" />
+            </div>
+        }
     </div>
     <div class="body-content">
         @if (Model != null && Model.Any())
@@ -41,7 +58,7 @@
     </div>
 
     <div class="body-footer">
-        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("SanPhamTheoDanhMuc", new { page }))</div>
         <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
     </div>
 

@@ -11,23 +11,68 @@ using System.Web.UI;
 
 namespace LinhDGT_Electronic.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SanPhamController : Controller
     {
         // GET: Admin/SanPham
         private ApplicationDbContext _dbContext = new ApplicationDbContext();
         // GET: Admin/SanPham
-        public ActionResult Index(int? page, string timkiem)
+        public ActionResult Index(int? page, string timkiem, string boloc, string sapxep)
         {
+            ViewBag.sapxep = sapxep;
+            ViewBag.sapxeptheoten = String.IsNullOrEmpty(sapxep) ? "ten_desc" : "";
+            ViewBag.sapxeptheogia = sapxep == "gia" ? "gia_desc" : "gia";
+            ViewBag.sapxeptheonamsanxuat = sapxep == "namsx" ? "namsx_desc" : "namsx";
+            ViewBag.sapxeptheosoluong = sapxep == "soluong" ? "soluong_desc" : "soluong";
             IEnumerable<SanPham> items = _dbContext.SanPhams.OrderByDescending(x => x.SanPhamID);
             var pagesize = 10;
+            if (timkiem != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                timkiem = boloc;
+            }
+            ViewBag.boloc = boloc;
+            
+            switch (sapxep)
+            {
+                case "ten_desc":
+                    items = items.OrderByDescending(p => p.SanPhamName);
+                    break;
+                case "gia":
+                    items = items.OrderBy(p => p.SanPhamUnitPrice);
+                    break;
+                case "gia_desc":
+                    items = items.OrderByDescending(p => p.SanPhamUnitPrice);
+                    break;
+                case "namsx":
+                    items = items.OrderBy(p => p.SanPhamProducedYear);
+                    break;
+                case "namsx_desc":
+                    items = items.OrderByDescending(p => p.SanPhamProducedYear);
+                    break;
+                case "soluong":
+                    items = items.OrderBy(p => p.SanPhamQuantity);
+                    break;
+                case "soluong_desc":
+                    items = items.OrderByDescending(p => p.SanPhamQuantity);
+                    break;
+                default:
+                    items = items.OrderBy(p => p.SanPhamName);
+                    break;
+            }
             if (page == null)
             {
                 page = 1;
             }
             if (!string.IsNullOrEmpty(timkiem))
             {
-                items = items.Where(x => x.SanPhamName.Contains(timkiem));
+                items = items.Where(x => x.SanPhamName.ToLower().Contains(timkiem));
             }
+            ViewBag.page = page;
+            ViewBag.pagesize = pagesize;
             var pagenumber = page.HasValue ? Convert.ToInt32(page) : 1;
             items = items.ToPagedList(pagenumber, pagesize);
             return View(items);

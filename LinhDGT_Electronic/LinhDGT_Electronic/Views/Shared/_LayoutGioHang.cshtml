@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="container-handmake">
+    <div class="container-handmake" id="load_data">
         <div class="header">
             <div class="header-left">
                 <div class="header-logo">
@@ -28,7 +28,6 @@
                 <div class="page-header-button">
                     <div class="user-control" style="position:relative">
                         <a class="header-button notice" id="notice"><i class="fa-solid fa-bell"></i></a>
-                        <span class="notice_item">0</span>
                     </div>
                     <div class="user-control">
                         <a class="header-button category" style="position:relative" href="/giohang">
@@ -46,14 +45,40 @@
                         <button class="header-button user"><i class="fa-solid fa-user"></i></button>
                         <div class="user-control-arrow"></div>
                         <div class="user-control-item">
-                            <div>@Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "button-user-control", id = "registerLink", @style = "width:100%;color:#000;display:flex;  text-decoration: none;    text-decoration-color: #000;" })</div>
-                            <div>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "button-user-control", id = "loginLink", @style = "width:100%;color:#000;display:flex;  text-decoration: none; text-decoration-color: #000;" })</div>
+                            @if (!Request.IsAuthenticated)
+                            {
+                                <div><i class="fa-solid fa-user-plus"></i>@Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "button-user-control", id = "registerLink", @style = "width:100%;color:#000;display:flex;  text-decoration: none;    text-decoration-color: #000;" })</div>
+                                <div><i class="fa-solid fa-right-from-bracket"></i>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "button-user-control", id = "loginLink", @style = "width:100%;color:#000;display:flex;  text-decoration: none; text-decoration-color: #000;" })</div>
+                            }
+                            else
+                            {
+                                <div><span style="width:100%;justify-content:start">Tài khoản: @User.Identity.Name</span></div>
+                                <div><a href="" style="width: 100%; justify-content: start">Chỉnh sửa tài khoản</a></div>
+                                <div><a href="/donhang/index/@User.Identity.Name" style="width: 100%; justify-content: start">Lịch sử mua hàng</a></div>
+                                <div>
+                                    <a href="javascript:document.getElementById('logoff').submit()" class="button-user-control" style="width: 100%; justify-content: start">
+                                        Đăng xuất <i class="fa-solid fa-right-from-bracket"></i>
+                                    </a>
+                                </div>
+                            }
                         </div>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <div style="display:none">
+                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logoff" }))
+                                {
+                                    @Html.AntiForgeryToken();
+                                }
+                            </div>
+
+                        }
 
                     </div>
+
                 </div>
             </div>
         </div>
+
         @RenderBody()
         <div class="footer">
             COPYRIGHT BY LÊ QUANG LINH
@@ -65,5 +90,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Content/js/giohang.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

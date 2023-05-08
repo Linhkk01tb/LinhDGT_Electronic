@@ -15,6 +15,7 @@
         $("#menu-controller").click(function () {
             $("#controllers").toggle();
         })
+        
     } catch (error) {
         console.log(error);
 }

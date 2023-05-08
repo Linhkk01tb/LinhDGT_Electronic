@@ -5,7 +5,7 @@
 }
 <div class="body">
     <div class="body-title">
-        <a href="/home/index">Home</a>
+        <a href="/home/index">Trang chủ</a>
         <span>/</span>
         <a href="/sanpham/sanphamtheothuonghieu/@Model.ThuongHieu.ThuongHieuID">@ViewBag.thuonghieu</a>
         <span style="overflow: hidden; text-overflow: ellipsis; width: 100px">/ @Model.SanPhamName</span>
@@ -45,6 +45,9 @@
                     Giá tiền: @Model.SanPhamUnitPrice.ToString("0,0 VNĐ")
                 </div>
                 <div class="item">
+                    Năm sản xuất: @Model.SanPhamProducedYear
+                </div>
+                <div class="item">
                     Số lượng mua: <input type="number" min="1" max="@Model.SanPhamQuantity" class="input" name="soluongmua" id="soluongmua" value="1" style="width:80px" required />
                 </div>
                 <div class="item">
@@ -52,7 +55,7 @@
                 </div>
                 <div class="item">
                     <a class="button-add-shopping-cart button btnAddShoppingCart" href="" data-id="@Model.SanPhamID">
-                        <i class="fa-solid fa-cart-plus"></i> 
+                        <i class="fa-solid fa-cart-plus"></i>
                         <span style="padding-left:8px">
                             Thêm vào giỏ hàng
                         </span>
@@ -75,7 +78,7 @@
             </div>
             <div class="product-description-content">
                 <div id="chitiet" class="tabcontent">
-                    @Model.SanPhamDescription
+                    @Html.Raw(Model.SanPhamDescription)
                 </div>
                 <div id="lienquan" class="tabcontent"
                      style="width: 100%; display: flex; column-gap: 30px; align-items: center;">
@@ -91,16 +94,16 @@
 
 
 <script>
-function myFunction(imgs) {
+    function myFunction(imgs) {
         var expandImg = document.getElementById("expandedImg");
         expandImg.src = imgs.src;
         expandImg.parentElement.style.display = "block";
-}
+    }
 </script>
 
 
 <script>
-function openFunc(evt, content) {
+    function openFunc(evt, content) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -112,7 +115,7 @@ function openFunc(evt, content) {
         }
         document.getElementById(content).style.display = "flex";
         evt.currentTarget.className += " active";
-}
-document.getElementById("chitietsanpham").click();
+    }
+    document.getElementById("chitietsanpham").click();
 
 </script>

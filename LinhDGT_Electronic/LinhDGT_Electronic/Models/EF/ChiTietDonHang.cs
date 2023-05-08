@@ -14,9 +14,9 @@ namespace LinhDGT_Electronic.Models.EF
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ChiTietDonHangID { get; set; }
         public int DonHangID { get; set; }
-        public string SanPhamID { get; set; }
-        public string SoLuongMua { get; set; }
-        public string ThanhTien { get; set; }
+        public int SanPhamID { get; set; }
+        public int SoLuongMua { get; set; }
+        public double ThanhTien { get; set; }
 
         public virtual DonHang DonHang { get; set; }
         public virtual SanPham SanPham { get; set; }

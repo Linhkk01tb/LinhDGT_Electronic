@@ -32,6 +32,7 @@ namespace LinhDGT_Electronic.Models.EF
         public int ThuongHieuID { get; set; }
         [Required(ErrorMessage = "Số lượng không được rỗng!")]
         public int SanPhamQuantity { get; set; }
+        public int SanPhamSellQuantity { get; set; }
         [Required(ErrorMessage = "Đơn giá không được rỗng!")]
         public double SanPhamUnitPrice { get; set; }
         public int SanPhamStatus { get; set; }
@@ -40,5 +41,10 @@ namespace LinhDGT_Electronic.Models.EF
         public virtual ICollection<AnhSanPham> AnhSanPhams { get;set; }
 
         public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get;set; }
+
+        public int TruSoluong(int truSoluong)
+        {
+            return SanPhamQuantity - truSoluong;
+        }
     }
 }

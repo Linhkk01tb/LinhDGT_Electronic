@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<LinhDGT_Electronic.Models.EF.SanPham>
 @{
     ViewBag.Title = "Trang quản lý";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -8,12 +8,12 @@
     <div class="body-title-admin">
         Tổng quan
     </div>
-    <div class="body-content-admin">
-        <div class="home-item">Sản phẩm: @ViewBag.sanpham</div>
-        <div class="home-item">Danh mục: @ViewBag.danhmuc</div>
-        <div class="home-item">Thương hiệu: @ViewBag.thuonghieu</div>
-        <div class="home-item">Đơn hàng: @ViewBag.donhang</div>
-        <div class="home-item">Nhân viên: @ViewBag.nhanvien</div>
-        <div class="home-item">Khách hàng: @ViewBag.khachhang</div>
+    <div class="body-content-admin" style="display: flex;column-gap:16px;row-gap:16px;flex-wrap:wrap;justify-content:center;">
+        <a class="home-item" style="background-color: aquamarine;" href="/admin/sanpham/index">Sản phẩm: @ViewBag.sanpham</a>
+        <a class="home-item" style="background-color: #e7ff6b" href="/admin/danhmuc/index">Danh mục: @ViewBag.danhmuc</a>
+        <a class="home-item" style="background-color: #fba3ff" href="/admin/thuonghieu/index">Thương hiệu: @ViewBag.thuonghieu</a>
+        <a class="home-item" style="background-color: #ffef60" href="/admin/donhang/index">Đơn hàng: @ViewBag.donhang</a>
+        <a class="home-item" style="background-color: #ffd800" href="/admin/nhanvien/index">Nhân viên: @ViewBag.nhanvien</a>
+        <a class="home-item" style="background-color: #4cff00" href="/admin/taikhoan/index">Tài khoản: @ViewBag.taikhoan</a>
     </div>
 </div>

@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@model IEnumerable<IdentityRole>
+@{
+    ViewBag.Title = "Phân quyền người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Danh sách quyền hạn</div>
+        <a class="button-admin-control-create" href="/admin/phanquyen/themquyenhan" style="margin-right:16px">Thêm mới</a>
+    </div>
+    <div class="body-content-admin">
+        <div class="table-content">
+
+            <table class="table-body">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Quyền hạn</th>
+                        <th colspan="2" style="width:100px">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr id="row_quyenhan_@item.Id">
+                                <td>@i</td>
+                                <td>@item.Name</td>
+                                <td><a class="button-admin-control-edit" href="/admin/phanquyen/suaquyenhan/@item.Id"><i class="fa fa-pen"></i> </a></td>
+                                <td><a class="button-admin-control-edit button-delete-quyenhan-by-id" style="background-color:red" href="" data-id="@item.Id"><i class="fa fa-trash"></i> </a></td>
+                            </tr>
+                            i++;
+                        }
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7">Không có bản ghi</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="body-footer">
+
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.button-delete-quyenhan-by-id', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Xoá bản ghi?');
+            if (conf === true) {
+                $.ajax({
+                    url: '/admin/phanquyen/xoaquyenhan',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            $('#row_quyenhan_' + id).remove();
+                            location.reload();
+                            alert('Đã xoá!');
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+</script>
+

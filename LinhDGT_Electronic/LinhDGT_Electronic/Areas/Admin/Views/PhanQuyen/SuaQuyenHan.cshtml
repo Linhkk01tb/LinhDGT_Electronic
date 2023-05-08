@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@model IdentityRole
+@{
+    ViewBag.Title = "Sửa quyền hạn";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Sửa quyền hạn</div>
+    </div>
+    <div class="body-content-admin">
+        @using (Html.BeginForm("ThemQuyenHan", "PhanQuyen", FormMethod.Post, new { }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(x=>x.Id)
+            <div class="form-mode">
+                <div class="item">
+                    <label for="">Tên quyền hạn</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "input", @placeholder = "Nhập tên quyền hạn...", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.Name, null, new { @style = "color:red" })
+                </div>
+                <div class="item" style="justify-content: end; column-gap: 16px;">
+                    <a href="/admin/phanquyen/index" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Quay lại</a>
+                    <button class="button-pop-up-footer" type="submit">Xác nhận</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="body-footer">
+
+    </div>
+</div>
+@*<script>
+        $(document).ready(function () {
+            $('body').on('click', '.button-delete-danhmuc-by-id', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Xoá bản ghi?');
+                if (conf === true) {
+                    $.ajax({
+                        url: '/admin/danhmuc/xoadanhmuc',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#row_danhmuc_' + id).remove();
+                                location.reload();
+                                alert('Đã xoá!');
+                            }
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>*@
+
+

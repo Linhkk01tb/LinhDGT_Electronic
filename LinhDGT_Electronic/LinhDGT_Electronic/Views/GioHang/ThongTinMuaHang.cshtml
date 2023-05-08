@@ -1,0 +1,52 @@
+﻿@model IEnumerable<LinhDGT_Electronic.Models.GioHangItem>
+@{
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+<style>
+    .error{
+        color:red
+    }
+</style>
+<div class="table-content" style="width:100%;padding-right:24px;box-sizing:border-box">
+    <div style="width:100%;font-weight:700;font-size:20px;margin-bottom:24px">Thông tin đơn hàng</div>
+    <table style="border-collapse:collapse;overflow:auto">
+        <thead>
+            <tr style="background-color:#cfcfcf">
+                <th style="width:200px">Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+
+                var tongtien = 0.0;
+                foreach (var item in Model)
+                {
+                    tongtien += item.Total;
+                    <tr>
+                        <td style="width:200px;overflow-wrap:break-word"><span style="white-space:normal;width:100%;">@item.SanPhamName</span></td>
+                        <td>@item.SanPhamBuyQuantity.ToString("0,0")</td>
+                        <td>@item.SanPhamUnitPrice.ToString("0,0 VNĐ")</td>
+                        <td>@item.Total.ToString("0,0 VNĐ")</td>
+                    </tr>
+
+
+                }
+                <tr style="background-color:#cfcfcf;">
+
+                    <th colspan="2"></th>
+                    <th>Tổng thanh toán:</th>
+                    <th> @tongtien.ToString("0,0 VNĐ")</th>
+
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+</div>
+

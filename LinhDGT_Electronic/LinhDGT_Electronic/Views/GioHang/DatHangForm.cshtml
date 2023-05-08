@@ -1,0 +1,57 @@
+﻿@model LinhDGT_Electronic.Models.DonHangViewModel
+@{
+    ViewBag.Title = "DatHangForm";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+@using (Html.BeginForm("DatHang", "GioHang", FormMethod.Post, new { }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="form-mode" style="width:90%;height:100%;justify-content:center;padding-left:16px;box-sizing:border-box">
+        <div class="item">
+            <span style="width:100%;font-weight:700;font-size:20px">Thông tin người nhận</span>
+        </div>
+        <div class="item">
+            <label for="" style="width:100%">Họ và tên</label>
+            @*<input type="text" class="input" style="width: 80%; height:40px" name="Name" placeholder="Nhập tên người nhận..." required />*@
+            @Html.TextBoxFor(x => x.DonHangReceiverName, new { @class = "input", @style = "width: 80%; height:40px", @placeholder = "Nhập tên người nhận...", @required = true })
+            @Html.ValidationMessageFor(x => x.DonHangReceiverName, null, new { @style = "color:red" })
+        </div>
+        <div class="item">
+            <label for="" style="width:100%">Số điện thoại</label>
+            @*<input type="text" class="input" style="width: 80%; height: 40px" name="Phone" placeholder="Nhập số điện thoại..." required />*@
+            @Html.TextBoxFor(x => x.DonHangReceiverPhoneNumber, new { @class = "input", @style = "width: 80%; height:40px", @placeholder = "Nhập số điện thoại...", @required = true })
+            @Html.ValidationMessageFor(x => x.DonHangReceiverPhoneNumber, null, new { @style = "color:red" })
+        </div>
+        <div class="item">
+            <label for="" style="width:100%">Email</label>
+            @*<input type="email" class="input" style="width: 80%; height: 40px" name="Email" placeholder="Nhập email..." required />*@
+            @Html.TextBoxFor(x => x.DonHangReceiverEmail, new { @class = "input", @style = "width: 80%; height:40px", @placeholder = "Nhập email...", @required = true, @type = "email" })
+            @Html.ValidationMessageFor(x => x.DonHangReceiverEmail, null, new { @style = "color:red" })
+        </div>
+        <div class="item">
+            <label for="" style="width:100%">Địa chỉ</label>
+            @*<input type="text" class="input" style="width: 80%; height: 40px" name="Address" placeholder="Nhập địa chỉ nhận hàng..." required />*@
+            @Html.TextBoxFor(x => x.DonHangReceiverAddress, new { @class = "input", @style = "width: 80%; height:40px", @placeholder = "Nhập địa chỉ nhận hàng...", @required = true })
+            @Html.ValidationMessageFor(x => x.DonHangReceiverAddress, null, new { @style = "color:red" })
+        </div>
+        @if (Request.IsAuthenticated)
+        {
+            <input type="hidden" name="User" value="@User.Identity.Name" />
+        }
+
+        <div class="item">
+            <label for="" style="width:100%">Phương thức thanh toán</label>
+            <select class="input" style="width: 80%; height: 40px">
+                <option value="1" selected>Thanh toán khi nhận hàng</option>
+            </select>
+        </div>
+        <div class="item">
+
+            <input type="submit" class="button button-admin-control-create" style="width: 80%;" value="Đặt hàng" />
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,109 @@
+﻿@model LinhDGT_Electronic.Models.EF.DonHang
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var status = "";
+}
+<div class="body">
+    <div class="body-title-admin">
+        <div class="title">Chi tiết đơn hàng [#@Model.DonHangCode]</div>
+    </div>
+    <div class="body-content-admin">
+        <div style="height:40px;width:100%;display:flex;justify-content:center;align-items:center;font-size:20px;font-weight:700">Thông tin người nhận</div>
+        <div class="table-content" style="padding:0 16px;box-sizing: border-box;">
+            @{
+
+                if (Model.DonHangStatus == 0)
+                {
+                    status = "Chờ xử lý";
+                }
+                else if (Model.DonHangStatus == 1)
+                {
+                    status = "Đang giao";
+                }
+                else if (Model.DonHangStatus == 2)
+                {
+                    status = "Hoàn thành";
+                }
+                else if (Model.DonHangStatus == 3)
+                {
+                    status = "Đã huỷ";
+                }
+
+
+            }
+            <table class="table-body">
+                <thead>
+                    <tr>
+                        <th>Người nhận</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày đặt</th>
+                        <th>Ngày cập nhật gần nhất</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.DonHangReceiverName</td>
+                        <td>@Model.DonHangReceiverPhoneNumber</td>
+                        <td>@Model.DonHangReceiverEmail</td>
+                        <td>@Model.DonHangReceiverAddress</td>
+                        <td>@Model.DonHangCreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@Model.DonHangModifiedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@status</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div style="height:40px;width:100%;display:flex;justify-content:center;align-items:center;font-size:20px;font-weight:700">Thông tin mua hàng</div>
+        <div class="table-content" style="padding:0 16px;box-sizing: border-box;">
+            <table class="table-body">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th style="width:300px">Tên sản phẩm</th>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Số lượng mua</th>
+                        <th>Đơn giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ChiTietDonHangs != null && Model.ChiTietDonHangs.Any())
+                    {
+                        var i = 0;
+                        var thanhtien = 0.0;
+                        foreach (var item in Model.ChiTietDonHangs)
+                        {
+                            thanhtien = item.SanPham.SanPhamUnitPrice * item.SoLuongMua;
+                            <tr>
+                                <td>@(i+1)</td>
+                                <td><span style="width:300px;white-space:normal">@item.SanPham.SanPhamName</span></td>
+                                <td><img src="~/Content/assets/images/@item.SanPham.SanPhamImage" width="80"></td>
+                                <td>@item.SoLuongMua</td>
+                                <td>@item.SanPham.SanPhamUnitPrice.ToString("0,0 VNĐ")</td>
+                                <td>@thanhtien.ToString("0,0 VNĐ")</td>
+                            </tr>
+                            i++;
+                        }
+                        <tr style="background-color:#cfcfcf">
+                            <td colspan="4"></td>
+                            <th>Tổng thanh toán:</th>
+                            <th>@Model.DonHangTotalPayment.ToString("0,0 VNĐ")</th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="body-footer" style="display:flex;justify-content:end;padding-right:24px;column-gap:10px">
+        <a href="/admin/donhang/index" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Tất cả</a>
+        <a href="/admin/donhang/choxuly" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center"> Chờ xử lý</a>
+        <a href="/admin/donhang/danggiao" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Đang giao</a>
+        <a href="/admin/donhang/hoanthanh" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Hoàn Thành</a>
+        <a href="/admin/donhang/dahuy" class="button-pop-up-footer" style="display:flex;justify-content:center;align-items:center">Đã huỷ</a>
+    </div>
+</div>

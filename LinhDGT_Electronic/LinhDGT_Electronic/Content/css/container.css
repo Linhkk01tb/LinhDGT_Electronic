@@ -34,12 +34,14 @@ body {
 .footer {
   width: 100%;
   height: 80px;
-  background-color: blueviolet;
+  background-color: #1b65ff;
+  color:white;
 }
 
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
+  height:5px;
   
 }
 

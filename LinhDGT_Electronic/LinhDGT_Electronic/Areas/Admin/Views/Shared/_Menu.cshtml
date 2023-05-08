@@ -1,7 +1,19 @@
 ﻿<div class="menu">
     <div class="menu-item">
-        <div class="item">
-            <a class="item-name" href="/admin/home/index" style="color:#fff">Tổng quan</a>
+        <div class="item" id="tongquancontrol" style="position:relative">
+            <div class="item-name" style="color:#fff">Tổng quan</div>
+            <div class="item-control" style="position:absolute;right:8px">
+                <span><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+        </div>
+        <div class="children-items" id="tongquanitems">
+
+            <a class="children" href="/admin/home/index">
+                Sơ lược
+            </a>
+            <a class="children" href="/admin/home/thongkedoanhthu">
+                Thống kê doanh thu
+            </a>
         </div>
     </div>
     <div class="menu-item">
@@ -20,19 +32,56 @@
         </div>
     </div>
     <div class="menu-item">
-        <div class="item">
-            <div class="item-name">Đơn hàng</div>
+        <div class="item" id="donhangcontrol" style="position:relative">
+            <div class="item-name" style="color:#fff">Đơn hàng</div>
+            <div class="item-control" style="position:absolute;right:8px">
+                <span><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+        </div>
+        <div class="children-items" id="donhangitems">
+
+            <a class="children" href="/admin/donhang/index">
+                Tất cả
+            </a>
+            <a class="children" href="/admin/donhang/choxuly">
+                Chờ xử lý
+            </a>
+            <a class="children" href="/admin/donhang/danggiao">
+                Đang giao
+            </a>
+            <a class="children" href="/admin/donhang/hoanthanh">
+                Hoàn thành
+            </a>
+            <a class="children" href="/admin/donhang/dahuy">
+                Đã huỷ
+            </a>
         </div>
     </div>
     <div class="menu-item">
         <div class="item">
             <a class="item-name" href="/admin/nhanvien/index" style="color:#fff">Nhân Viên</a>
         </div>
+
     </div>
     <div class="menu-item">
         <div class="item">
-            <div class="item-name">Khách hàng</div>
+            <a class="item-name" href="/admin/taikhoan/index" style="color:#fff">Tài khoản</a>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item">
+            <a class="item-name" href="/admin/phanquyen/index" style="color:#fff">Quyền hạn</a>
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function(){
+        $("#donhangcontrol").click(function () {
+            $("#donhangitems").toggle();
+        });
+        $("#tongquancontrol").click(function () {
+            $("#tongquanitems").toggle();
+        });
+    });
+</script>

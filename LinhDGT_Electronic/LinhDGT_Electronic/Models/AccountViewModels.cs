@@ -48,10 +48,10 @@ namespace LinhDGT_Electronic.Models
 
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Email là trường bắt buộc!")]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Tên tài khoản là trường bắt buộc!")]
+        [Display(Name = "UserName")]
+        //[EmailAddress(ErrorMessage = "Email không đúng định dạng!")]
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Mật khẩu là trường bắt buộc!")]
         [DataType(DataType.Password)]
@@ -68,10 +68,39 @@ namespace LinhDGT_Electronic.Models
         [EmailAddress(ErrorMessage ="Email không đúng định dạng!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Tên tài khoản là trường bắt buộc!")]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Mật khẩu là trường bắt buộc!")]
         [StringLength(100, ErrorMessage = "{0} phải gồm ít nhất {2} ký tự!", MinimumLength = 6)]
         [DataType(DataType.Password,ErrorMessage ="Mật khẩu không đủ mạnh!")]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "Mật khẩu không trùng khớp!")]
+        public string ConfirmPassword { get; set; }
+    }
+    public class CreateAccountViewModel
+    {
+        [Required(ErrorMessage = "Email là trường bắt buộc!")]
+        [EmailAddress(ErrorMessage = "Email không đúng định dạng!")]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Tên tài khoản là trường bắt buộc!")]
+        public string UserName { get; set; }
+        [Required(ErrorMessage = "Họ tên là trường bắt buộc!")]
+        public string FullName { get; set; }
+        public string PhoneNumber { get; set; }
+        public int Status { get; set; }
+        public string Role { get; set; }
+
+        [Required(ErrorMessage = "Mật khẩu là trường bắt buộc!")]
+        [StringLength(100, ErrorMessage = "{0} phải gồm ít nhất {2} ký tự!", MinimumLength = 6)]
+        [DataType(DataType.Password, ErrorMessage = "Mật khẩu không đủ mạnh!")]
         [Display(Name = "Password")]
         public string Password { get; set; }
 

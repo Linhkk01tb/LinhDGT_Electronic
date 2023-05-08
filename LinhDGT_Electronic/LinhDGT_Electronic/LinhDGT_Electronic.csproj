@@ -184,11 +184,16 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AnhSanPhamController.cs" />
     <Compile Include="Areas\Admin\Controllers\DanhMucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DonHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhanVienController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PhanQuyenController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanPhamController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TaiKhoanController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThuongHieuController.cs" />
+    <Compile Include="Common\Common.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -225,8 +230,61 @@
     <Compile Include="Migrations\202304281833032_update-sanpham.designer.cs">
       <DependentUpon>202304281833032_update-sanpham.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305011008138_update-csld.cs" />
+    <Compile Include="Migrations\202305011008138_update-csld.designer.cs">
+      <DependentUpon>202305011008138_update-csld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305011113153_update-table-donhang.cs" />
+    <Compile Include="Migrations\202305011113153_update-table-donhang.designer.cs">
+      <DependentUpon>202305011113153_update-table-donhang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305011124243_update-donhang-1.cs" />
+    <Compile Include="Migrations\202305011124243_update-donhang-1.designer.cs">
+      <DependentUpon>202305011124243_update-donhang-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305011335287_update-donhang-2.cs" />
+    <Compile Include="Migrations\202305011335287_update-donhang-2.designer.cs">
+      <DependentUpon>202305011335287_update-donhang-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305011529164_update-chitietsanpham.cs" />
+    <Compile Include="Migrations\202305011529164_update-chitietsanpham.designer.cs">
+      <DependentUpon>202305011529164_update-chitietsanpham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305011532064_update-chitietdonhang-1.cs" />
+    <Compile Include="Migrations\202305011532064_update-chitietdonhang-1.designer.cs">
+      <DependentUpon>202305011532064_update-chitietdonhang-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305040431128_upadte-user.cs" />
+    <Compile Include="Migrations\202305040431128_upadte-user.designer.cs">
+      <DependentUpon>202305040431128_upadte-user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305040434545_update-user.cs" />
+    <Compile Include="Migrations\202305040434545_update-user.designer.cs">
+      <DependentUpon>202305040434545_update-user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305051225245_update-sanphamsellquantity.cs" />
+    <Compile Include="Migrations\202305051225245_update-sanphamsellquantity.designer.cs">
+      <DependentUpon>202305051225245_update-sanphamsellquantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305071912229_update-all-database.cs" />
+    <Compile Include="Migrations\202305071912229_update-all-database.designer.cs">
+      <DependentUpon>202305071912229_update-all-database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305071916236_update-all-2.cs" />
+    <Compile Include="Migrations\202305071916236_update-all-2.designer.cs">
+      <DependentUpon>202305071916236_update-all-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305072127209_update-userid.cs" />
+    <Compile Include="Migrations\202305072127209_update-userid.designer.cs">
+      <DependentUpon>202305072127209_update-userid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305072138407_update-all.cs" />
+    <Compile Include="Migrations\202305072138407_update-all.designer.cs">
+      <DependentUpon>202305072138407_update-all.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DonHangViewModel.cs" />
     <Compile Include="Models\EF\AnhSanPham.cs" />
     <Compile Include="Models\EF\SanPham.cs" />
     <Compile Include="Models\EF\DonHang.cs" />
@@ -234,8 +292,7 @@
     <Compile Include="Models\EF\ChiTietDonHang.cs" />
     <Compile Include="Models\EF\ThuongHieu.cs" />
     <Compile Include="Models\EF\DanhMuc.cs" />
-    <Compile Include="Models\EF\KhachHang.cs" />
-    <Compile Include="Models\GioHang.cs" />
+    <Compile Include="Models\GioHangViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -5058,6 +5115,8 @@
     <Content Include="Content\plugins\uplot\uPlot.iife.js" />
     <Content Include="Content\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Content\plugins\uplot\uPlot.min.css" />
+    <Content Include="Content\templeMail\send1.html" />
+    <Content Include="Content\templeMail\send2.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -5212,6 +5271,20 @@
     <Content Include="Content\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\plugins\toastr\toastr.js.map" />
     <Content Include="Content\assets\images\empty-cart.png" />
+    <Content Include="Areas\Admin\Views\DonHang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHang\chitietdonhang.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHang\ChoXuLy.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHang\DangGiao.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHang\HoanThanh.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHang\DaHuy.cshtml" />
+    <Content Include="Areas\Admin\Views\PhanQuyen\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PhanQuyen\ThemQuyenHan.cshtml" />
+    <Content Include="Areas\Admin\Views\PhanQuyen\SuaQuyenHan.cshtml" />
+    <Content Include="Areas\Admin\Views\TaiKhoan\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TaiKhoan\ThemTaiKhoan.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ThongKeDoanhThu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutEmpty.cshtml" />
+    <Content Include="Areas\Admin\Views\TaiKhoan\Login.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -5270,6 +5343,17 @@
     <Content Include="Views\GioHang\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutGioHang.cshtml" />
     <Content Include="Views\Home\LienHe.cshtml" />
+    <Content Include="Views\GioHang\DatHang.cshtml" />
+    <Content Include="Views\GioHang\ThongTinMuaHang.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
+    <Content Include="Views\GioHang\DatHangForm.cshtml" />
+    <Content Include="Views\GioHang\DatHangThanhCong.cshtml" />
+    <Content Include="Views\DonHang\Index.cshtml" />
+    <Content Include="Views\DonHang\DaHuy.cshtml" />
+    <Content Include="Views\DonHang\HoanThanh.cshtml" />
+    <Content Include="Views\DonHang\DangGiao.cshtml" />
+    <Content Include="Views\DonHang\ChoXuLy.cshtml" />
+    <Content Include="Views\DonHang\chitietdonhang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5312,6 +5396,45 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304281833032_update-sanpham.resx">
       <DependentUpon>202304281833032_update-sanpham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305011008138_update-csld.resx">
+      <DependentUpon>202305011008138_update-csld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305011113153_update-table-donhang.resx">
+      <DependentUpon>202305011113153_update-table-donhang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305011124243_update-donhang-1.resx">
+      <DependentUpon>202305011124243_update-donhang-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305011335287_update-donhang-2.resx">
+      <DependentUpon>202305011335287_update-donhang-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305011529164_update-chitietsanpham.resx">
+      <DependentUpon>202305011529164_update-chitietsanpham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305011532064_update-chitietdonhang-1.resx">
+      <DependentUpon>202305011532064_update-chitietdonhang-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305040431128_upadte-user.resx">
+      <DependentUpon>202305040431128_upadte-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305040434545_update-user.resx">
+      <DependentUpon>202305040434545_update-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305051225245_update-sanphamsellquantity.resx">
+      <DependentUpon>202305051225245_update-sanphamsellquantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305071912229_update-all-database.resx">
+      <DependentUpon>202305071912229_update-all-database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305071916236_update-all-2.resx">
+      <DependentUpon>202305071916236_update-all-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305072127209_update-userid.resx">
+      <DependentUpon>202305072127209_update-userid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305072138407_update-all.resx">
+      <DependentUpon>202305072138407_update-all.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

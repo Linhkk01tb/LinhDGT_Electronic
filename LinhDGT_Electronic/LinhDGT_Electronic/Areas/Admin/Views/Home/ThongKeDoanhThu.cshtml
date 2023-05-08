@@ -1,0 +1,72 @@
+﻿@model PagedList.PagedList<LinhDGT_Electronic.Models.EF.SanPham>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Thống kê doanh thu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body">
+    <div class="body-title-admin" style="height:60px">
+        <div class="title">Thống kê doanh thu</div>
+    </div>
+    <div class="body-content-admin">
+        <div class="table-content">
+            <table class="table-body">
+                <thead>
+                    <tr>
+
+                        <th>STT</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Số lượng đã bán</th>
+                        <th>Thành tiền</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = ((ViewBag.page - 1) * ViewBag.pagesize + 1);
+                        var thanhtien = 0.0;
+                        var tongdoanhthu = 0.0;
+                        foreach (var item in Model)
+                        {
+
+                            thanhtien = item.SanPhamUnitPrice * item.SanPhamSellQuantity;
+                            tongdoanhthu += thanhtien;
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.SanPhamName</td>
+                                <td><img src="~/Content/assets/images/@item.SanPhamImage" width="80" /></td>
+                                <td>@item.SanPhamSellQuantity</td>
+                                <td>@thanhtien.ToString("0,0 VNĐ")</td>
+                            </tr>
+                            i++;
+                        }
+
+                        <tr style="position:sticky;bottom:0;background-color:#cfcfcf">
+                            <td colspan="3"></td>
+                            <th>Tổng doanh thu:</th>
+                            <th>
+                                @ViewBag.tongdoanhthu.ToString("0,0 VNĐ")
+                            </th>
+                    </tr>
+
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">Không có bản ghi</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="body-footer">
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("ThongKeDoanhThu", new { page, sapxep = ViewBag.sapxep, boloc = ViewBag.boloc }))</div>
+        <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+    </div>
+</div>

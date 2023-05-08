@@ -10,19 +10,47 @@ using System.Web.Helpers;
 
 namespace LinhDGT_Electronic.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ThuongHieuController : Controller
     {
         private ApplicationDbContext _dbContext = new ApplicationDbContext();
         // GET: Admin/ThuongHieu
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string timkiem, string boloc, string sapxep)
         {
+            ViewBag.sapxep = sapxep;
+            ViewBag.sapxeptheoten = String.IsNullOrEmpty(sapxep) ? "ten_desc" : "";
+            IEnumerable<ThuongHieu> items = _dbContext.ThuongHieus.OrderByDescending(x => x.ThuongHieuID);
             var pagesize = 10;
+            if (timkiem != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                timkiem = boloc;
+            }
+            ViewBag.boloc = boloc;
+            switch (sapxep)
+            {
+                case "ten_desc":
+                    items = items.OrderByDescending(p => p.ThuongHieuName);
+                    break;
+                default:
+                    items = items.OrderBy(p => p.ThuongHieuName);
+                    break;
+            }
             if (page == null)
             {
                 page = 1;
             }
+            if (!string.IsNullOrEmpty(timkiem))
+            {
+                items = items.Where(x => x.ThuongHieuName.ToLower().Contains(timkiem));
+            }
             var pagenumber = page.HasValue ? Convert.ToInt32(page) : 1;
-            var items = _dbContext.ThuongHieus.OrderByDescending(x => x.ThuongHieuID).ToPagedList(pagenumber, pagesize);
+            items = items.ToPagedList(pagenumber, pagesize);
+            ViewBag.page = page;
+            ViewBag.pagesize = pagesize;
             return View(items);
         }
         [HttpGet]

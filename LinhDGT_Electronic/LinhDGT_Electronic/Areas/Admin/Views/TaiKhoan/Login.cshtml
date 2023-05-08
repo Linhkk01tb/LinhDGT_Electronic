@@ -1,0 +1,37 @@
+﻿@model LinhDGT_Electronic.Models.LoginViewModel
+@{
+    ViewBag.Title = "Đăng nhập admin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
+}
+@using (Html.BeginForm("Login", "TaiKhoan", FormMethod.Post, new { @class = "login-screen" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(false);
+    <div class="login-admin">
+        <div class="title">Đăng nhập admin</div>
+        <div class="content">
+            <div class="item">
+                <label for="" style="width:100%">Tài khoản</label>
+                @Html.TextBoxFor(x => x.UserName, new { @placeholder = "Nhập tài khoản...", @class = "input" })
+                @Html.ValidationMessageFor(x => x.UserName, null, new { @style = "color:red" })
+            </div>
+            <div class="item">
+                <label for="" style="width:100%">Mật khẩu</label>
+                @Html.PasswordFor(x => x.Password, new { @placeholder = "Nhập mật khẩu...", @class = "input" })
+                @Html.ValidationMessageFor(x => x.Password, null, new { @style = "color:red" })
+            </div>
+            <div class="item" style="justify-content:start">
+                @Html.CheckBoxFor(x => x.RememberMe)
+               <label for="remember">
+                   Nhớ mật khẩu?
+               </label>
+
+            </div>
+            <div class="item">
+                <input type="submit" class="button-admin-control-create" value="Đăng nhập" />
+            </div>
+        </div>
+        
+    </div>
+}
+

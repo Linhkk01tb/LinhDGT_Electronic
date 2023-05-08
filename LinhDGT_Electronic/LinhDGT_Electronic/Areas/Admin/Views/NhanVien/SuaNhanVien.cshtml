@@ -14,7 +14,7 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
             @Html.HiddenFor(x=>x.NhanVienID)
-            <div class="form-mode">
+            <div class="form-mode" >
                 <div class="item">
                     <label for="">Tên nhân viên</label>
                     @Html.TextBoxFor(x => x.NhanVienName, new { @class = "input", @placeholder = "Nhập tên nhân viên...", @autocomplete = "off" })

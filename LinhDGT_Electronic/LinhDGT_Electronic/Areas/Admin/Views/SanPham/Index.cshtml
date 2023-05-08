@@ -10,16 +10,16 @@
 <div class="body">
     <div class="body-title-admin">
         <div class="title">Danh sách sản phẩm</div>
-        <div class="page-search">
-            <input type="text" placeholder="Nhập từ khoá để tìm kiếm..." class="input-search">
-            <button class="button-search">
-                <img src="~/Content/assets/icon/magnifying-glass-solid.svg" alt="search"
-                     width="24">
-            </button>
+        @using (Html.BeginForm())
+        {
+            <div class="page-search">
+                @Html.TextBox("timkiem", ViewBag.boloc as string, new { @class = "input-search", @placeholder = "Nhập từ khoá để tìm kiếm" })
+                <input type="submit" class="button-search" value="Tìm kiếm" />
+            </div>
+         }
+            <a class="button-admin-control-create" href="/admin/SanPham/themSanPham">Thêm mới</a>
+            <a class="button-admin-control-delete" id="button-delete-all" style="display:flex;justify-content:center;align-items:center"><i class="fa-solid fa-trash"></i></a>
         </div>
-        <a class="button-admin-control-create" href="/admin/SanPham/themSanPham">Thêm mới</a>
-        <a class="button-admin-control-delete" id="button-delete-all" style="display:flex;justify-content:center;align-items:center"><i class="fa-solid fa-trash"></i></a>
-    </div>
     <div class="body-content-admin">
         <div class="table-content">
             <table class="table-body">
@@ -27,13 +27,13 @@
                     <tr>
                         <th><input type="checkbox" id="SelectAll"></th>
                         <th>STT</th>
-                        <th style="width: 200px;">Tên sản phẩm</th>
+                        <th style="width: 200px;"> @Html.ActionLink("Tên sản phẩm", "Index", new { sapxep = ViewBag.sapxeptheoten, boloc = ViewBag.boloc })</th>
                         <th>Ảnh đại diện</th>
-                        <th>Năm sản xuất</th>
+                        <th> @Html.ActionLink("Năm sản xuất", "Index", new { sapxep = ViewBag.sapxeptheonamsanxuat, boloc = ViewBag.boloc })</th>
                         <th>Danh mục</th>
                         <th>Thương hiệu</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
+                        <th> @Html.ActionLink("Số lượng", "Index", new { sapxep = ViewBag.sapxeptheosoluong, boloc = ViewBag.boloc })</th>
+                        <th> @Html.ActionLink("Đơn giá", "Index", new { sapxep = ViewBag.sapxeptheogia, boloc = ViewBag.boloc })</th>
                         <th>Trạng thái</th>
                         <th colspan="2">Thao tác</th>
                     </tr>
@@ -41,7 +41,7 @@
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
-                        var i = 1;
+                        var i = ((ViewBag.page - 1) * ViewBag.pagesize + 1);
                         var status = "";
 
                         foreach (var item in Model)
@@ -57,7 +57,7 @@
                             <tr id="row_sanpham_@item.SanPhamID">
                                 <td><input type="checkbox" value="@item.SanPhamID"></td>
                                 <td>@i</td>
-                                <td style="width:200px;overflow-wrap:break-word">@item.SanPhamName</td>
+                                <td><span style="width:200px;white-space:normal;text-overflow:ellipsis;">@item.SanPhamName</span></td>
                                 <td><img src="~/Content/assets/images/@item.SanPhamImage" width="120" class="imgproduct" data-id="@item.SanPhamID" /></td>
                                 <td>@item.SanPhamProducedYear</td>
                                 <td>@item.DanhMuc.DanhMucName</td>
@@ -85,7 +85,7 @@
         </div>
     </div>
     <div class="body-footer">
-        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+        <div style="padding-left:16px;box-sizing:border-box">@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sapxep = ViewBag.sapxep, boloc = ViewBag.boloc }))</div>
         <span style="padding-right: 16px;box-sizing:border-box">Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
     </div>
 
