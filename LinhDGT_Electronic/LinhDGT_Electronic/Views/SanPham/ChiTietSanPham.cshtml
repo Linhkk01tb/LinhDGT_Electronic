@@ -37,7 +37,7 @@
                     Thương hiệu: @Model.ThuongHieu.ThuongHieuName
                 </div>
                 <div class="item">
-                    Tên sản phẩm:<div style="width:100%;white-space:normal;overflow:hidden;overflow-wrap:break-word">@Model.SanPhamName</div>
+                    Tên sản phẩm:<span style="width:100%;white-space:normal;overflow:hidden;overflow-wrap:break-word">@Model.SanPhamName</span>
                 </div>
                 <div class="item">
                     Giá tiền: @Model.SanPhamUnitPrice.ToString("0,0 VNĐ")
@@ -68,10 +68,6 @@
                 <button id="chitietsanpham" class="item tablinks" onclick="openFunc(event, 'chitiet')">
                     Chi tiết
                     sản phẩm
-                </button>
-                <button id="sanphamlienquan" class="item tablinks" onclick="openFunc(event, 'lienquan')">
-                    Sản
-                    phẩm liên quan
                 </button>
             </div>
             <div class="product-description-content">

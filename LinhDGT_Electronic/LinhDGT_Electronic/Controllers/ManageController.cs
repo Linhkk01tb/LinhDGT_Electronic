@@ -238,7 +238,7 @@ namespace LinhDGT_Electronic.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", new { Message = "Đổi mật khẩu thành công!" });
             }
             AddErrors(result);
             return View(model);

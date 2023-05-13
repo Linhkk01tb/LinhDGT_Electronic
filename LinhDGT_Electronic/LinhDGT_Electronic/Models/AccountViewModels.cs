@@ -73,7 +73,7 @@ namespace LinhDGT_Electronic.Models
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Mật khẩu là trường bắt buộc!")]
-        [StringLength(100, ErrorMessage = "{0} phải gồm ít nhất {2} ký tự!", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải gồm ít nhất 6 ký tự!", MinimumLength = 6)]
         [DataType(DataType.Password,ErrorMessage ="Mật khẩu không đủ mạnh!")]
         [Display(Name = "Password")]
         public string Password { get; set; }

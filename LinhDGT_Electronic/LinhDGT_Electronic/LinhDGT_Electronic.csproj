@@ -5285,6 +5285,7 @@
     <Content Include="Areas\Admin\Views\Home\ThongKeDoanhThu.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutEmpty.cshtml" />
     <Content Include="Areas\Admin\Views\TaiKhoan\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout404.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

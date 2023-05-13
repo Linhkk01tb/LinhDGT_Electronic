@@ -24,7 +24,6 @@
             <table class="table-body">
                 <thead>
                     <tr>
-                        <th><input type="checkbox"></th>
                         <th>STT</th>
                         <th>@Html.ActionLink("Tên thương hiệu", "Index", new { sapxep = ViewBag.sapxeptheoten, boloc = ViewBag.boloc })</th>
                         <th>Trạng thái</th>
@@ -48,7 +47,6 @@
                                 status = "Vô hiệu";
                             }
                             <tr id="row_thuonghieu_@item.ThuongHieuID">
-                                <td><input type="checkbox"></td>
                                 <td>@i</td>
                                 <td>@item.ThuongHieuName</td>
                                 <td>@status</td>
